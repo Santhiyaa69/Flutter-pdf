@@ -1,4 +1,4 @@
-import 'package:print_pdf/main.dart';
+import '../common/branch_info.dart';
 
 class SalesByInchargeRecord {
   final String name;

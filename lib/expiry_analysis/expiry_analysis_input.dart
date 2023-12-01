@@ -1,4 +1,4 @@
-import 'package:print_pdf/main.dart';
+import 'package:print_pdf/common/branch_info.dart';
 
 class ExpiryAnalysisRecord {
   final String expiry;

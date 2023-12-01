@@ -1,4 +1,4 @@
-import '../main.dart';
+import '../common/branch_info.dart';
 
 class PurchaseRegisterSummary {
   final double billAmount;

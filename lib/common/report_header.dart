@@ -1,6 +1,6 @@
 import 'package:pdf/widgets.dart' as pw;
 
-import '../main.dart';
+import 'branch_info.dart';
 
 pw.Widget buildReportHeader({
   required String orgName,
