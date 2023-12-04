@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:print_pdf/sale/sale.dart';
+import 'package:print_pdf/sale/sale_a4.dart';
 import 'package:printing/printing.dart';
 
 // import 'customer_wise_sales/customer_wise_sales.dart';
@@ -17,16 +17,19 @@ import 'package:printing/printing.dart';
 
 import 'common/branch_info.dart';
 import 'sale/input.dart';
-import 'sale_register/sale_register_detail.dart';
+import 'package:print_pdf/sale/sale_78mm.dart';
+import 'sale/sale_a6.dart';
+
+// import 'sale_register/sale_register_detail.dart';
 // import 'sale_register/sale_register_view.dart';
-import 'sale_register/sale_register_input.dart';
+// import 'sale_register/sale_register_input.dart';
 
 // import 'purchase_register/purchase_register.dart';
 // import 'purchase_register/purchase_register_detail.dart';
 // import 'purchase_register/purchase_register_input.dart';
 
-import 'reorder_analysis/reorder_analysis.dart';
-import 'reorder_analysis/reorder_analysis_input.dart';
+// import 'reorder_analysis/reorder_analysis.dart';
+// import 'reorder_analysis/reorder_analysis_input.dart';
 
 const double point = 1.0;
 const double inch = 72.0;
@@ -101,9 +104,9 @@ class Home extends StatelessWidget {
                 // reorderAnalysis(reorderAnalysisData);
 
                 // sale78mm(saleData);
-                // buildlayoutAconfig(saleData, saleLayoutAConfig);
-                // buildSaleLayoutB(saleData, saleLayoutBConfig);
-                buildSaleLayoutA6(saleData, saleLayoutBConfig);
+                // buildSaleLayoutA(saleData, saleLayoutAConfig);
+                buildSaleLayoutB(saleData, saleLayoutBConfig);
+            // buildSaleLayoutA6(saleData, saleLayoutA6Config);
           },
         ),
       ),

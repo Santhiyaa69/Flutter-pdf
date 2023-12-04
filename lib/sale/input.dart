@@ -145,123 +145,53 @@ class SaleData {
   });
 }
 
-class LayoutAHeader {
-  final bool showOrganizationName;
-  final bool showOrganizationAddress;
-  final bool showOrganizationPhone;
-  final bool showOrganizationDetails;
-  // final bool showPartyInfo;
-
-  LayoutAHeader({
-    this.showOrganizationName = false,
-    this.showOrganizationAddress = false,
-    this.showOrganizationPhone = false,
-    this.showOrganizationDetails = false,
-    // this.showPartyInfo = false,
-  });
-}
-
-class TransactionConfig {
-  final bool enabled;
+class ColumnConfig {
   final double width;
-  final String? label;
+  final String label;
 
-  TransactionConfig({
-    this.enabled = false,
+  ColumnConfig({
     required this.width,
     required this.label,
   });
 }
 
-class LayoutATransactionInfo {
-  final TransactionConfig item;
-  final TransactionConfig qty;
-  final TransactionConfig mrp;
-  final TransactionConfig rate;
-  final TransactionConfig amount;
-  final TransactionConfig discount;
-
-  LayoutATransactionInfo({
-    required this.item,
-    required this.qty,
-    required this.mrp,
-    required this.rate,
-    required this.amount,
-    required this.discount,
-  });
-}
-
-class LayoutAFooter {
+class SaleLayoutAConfig {
+  final double pageWidth;
+  final double margin;
+  final bool showOrganizationAddress;
+  final bool showOrganizationPhone;
+  final bool showOrganizationMobile;
+  final bool showOrganizationEmail;
+  final bool showGstNo;
+  final bool showLicNo;
+  final String title;
+  final ColumnConfig item;
+  final ColumnConfig qty;
+  final ColumnConfig mrp;
+  final ColumnConfig rate;
+  final ColumnConfig amount;
+  final ColumnConfig discount;
   final List<String>? termsAndConditions;
   final String? greetings;
 
-  LayoutAFooter({
-    this.termsAndConditions,
-    this.greetings,
-  });
-}
-
-class SalePdfLayoutAConfig {
-  final double pageWidth;
-  final LayoutAHeader header;
-  final LayoutATransactionInfo transactionInfo;
-  final LayoutAFooter footer;
-
-  SalePdfLayoutAConfig({
+  SaleLayoutAConfig({
+    required this.margin,
     required this.pageWidth,
-    required this.header,
-    required this.transactionInfo,
-    required this.footer,
-  });
-}
-
-class LayoutBHeader {
-  final bool showOrganizationName;
-  final bool showOrganizationAddress;
-  final bool showOrganizationPhone;
-  final bool showOrganizationDetails;
-  final bool showPartyInfo;
-  final bool showVoucherInfo;
-  final bool showContactInfo; //[patient and doctor]
-
-  LayoutBHeader({
-    this.showOrganizationName = false,
     this.showOrganizationAddress = false,
     this.showOrganizationPhone = false,
-    this.showOrganizationDetails = false,
-    this.showPartyInfo = false,
-    this.showVoucherInfo = false,
-    this.showContactInfo = false,
-  });
-}
-
-class LayoutBTransactionInfo {
-  final TransactionConfig serialNo;
-  final TransactionConfig item;
-  final TransactionConfig hsnCode;
-  final TransactionConfig qty;
-  final TransactionConfig mrp;
-  final TransactionConfig rate;
-  final TransactionConfig unit;
-  final TransactionConfig taxableValue;
-  final TransactionConfig taxRatio;
-  final TransactionConfig taxAmount;
-  final TransactionConfig discount;
-  final TransactionConfig amount;
-
-  LayoutBTransactionInfo({
-    required this.serialNo,
+    this.showOrganizationMobile = false,
+    this.showOrganizationEmail = false,
+    this.showGstNo = false,
+    this.showLicNo = false,
+    required this.title,
     required this.item,
-    required this.hsnCode,
     required this.qty,
     required this.mrp,
     required this.rate,
-    required this.unit,
-    required this.taxableValue,
-    required this.taxRatio,
-    required this.taxAmount,
-    required this.discount,
     required this.amount,
+    required this.discount,
+    this.termsAndConditions,
+    this.greetings,
   });
 }
 
@@ -283,7 +213,30 @@ class BankDetails {
   });
 }
 
-class LayoutBFooter {
+class SaleLayoutBConfig {
+  final double pageWidth;
+  final double pageHeight;
+  final double margin;
+  final String orientation;
+  final bool showOrganizationName;
+  final bool showOrganizationAddress;
+  final bool showOrganizationPhone;
+  final bool showOrganizationDetails;
+  final bool showPartyInfo;
+  final bool showVoucherInfo;
+  final bool showContactInfo; //[patient and doctor]
+  final ColumnConfig serialNo;
+  final ColumnConfig item;
+  final ColumnConfig hsnCode;
+  final ColumnConfig qty;
+  final ColumnConfig mrp;
+  final ColumnConfig rate;
+  final ColumnConfig unit;
+  final ColumnConfig taxableValue;
+  final ColumnConfig taxRatio;
+  final ColumnConfig taxAmount;
+  final ColumnConfig discount;
+  final ColumnConfig amount;
   final bool showGSTSummary;
   final BankDetails? showBankDetails;
   final bool showBillDetails;
@@ -291,7 +244,30 @@ class LayoutBFooter {
   final List<String>? termsAndConditions;
   final String? greetings;
 
-  LayoutBFooter({
+  SaleLayoutBConfig({
+    required this.pageWidth,
+    required this.pageHeight,
+    required this.margin,
+    this.orientation = "landscape",
+    this.showOrganizationName = false,
+    this.showOrganizationAddress = false,
+    this.showOrganizationPhone = false,
+    this.showOrganizationDetails = false,
+    this.showPartyInfo = false,
+    this.showVoucherInfo = false,
+    this.showContactInfo = false,
+    required this.serialNo,
+    required this.item,
+    required this.hsnCode,
+    required this.qty,
+    required this.mrp,
+    required this.rate,
+    required this.unit,
+    required this.taxableValue,
+    required this.taxRatio,
+    required this.taxAmount,
+    required this.discount,
+    required this.amount,
     this.showGSTSummary = false,
     this.showBankDetails,
     this.showBillDetails = false,
@@ -301,55 +277,198 @@ class LayoutBFooter {
   });
 }
 
-class SalePdfLayoutBConfig {
+class SaleLayoutA6Config {
   final double pageWidth;
   final double pageHeight;
-  final LayoutBHeader header;
-  final LayoutBTransactionInfo transactionInfo;
-  final LayoutBFooter footer;
+  final double margin;
+  final bool showOrganizationName;
+  final bool showOrganizationAddress;
+  final bool showOrganizationPhone;
+  final bool showOrganizationDetails;
+  final bool showVoucherInfo;
+  final bool showContactInfo; //[patient and doctor]
 
-  SalePdfLayoutBConfig({
+  final ColumnConfig item;
+  final ColumnConfig rack;
+  final ColumnConfig batchNo;
+  final ColumnConfig expiry;
+  final ColumnConfig qty;
+  final ColumnConfig mrp;
+  final ColumnConfig rate;
+  final ColumnConfig discount;
+  final ColumnConfig amount;
+  final bool showGSTSummary;
+  final bool showBillDetails;
+
+  SaleLayoutA6Config({
     required this.pageWidth,
     required this.pageHeight,
-    required this.header,
-    required this.transactionInfo,
-    required this.footer,
+    required this.margin,
+    this.showOrganizationName = false,
+    this.showOrganizationAddress = false,
+    this.showOrganizationPhone = false,
+    this.showOrganizationDetails = false,
+    this.showVoucherInfo = false,
+    this.showContactInfo = false,
+    required this.item,
+    required this.rack,
+    required this.batchNo,
+    required this.expiry,
+    required this.qty,
+    required this.mrp,
+    required this.rate,
+    required this.amount,
+    required this.discount,
+    this.showGSTSummary = false,
+    this.showBillDetails = false,
   });
 }
 
+// final saleData = SaleData(
+//   title: "Sale",
+//   orgName: "MA MEDICALS",
+//   branchInfo: BranchInfo(
+//     displayName: "DP ROAD",
+//     gstNo: "33ANEPA4609G3ZI",
+//     licNo: null,
+//     phone: null,
+//     email: null,
+//     mobileNos: ["8575757546"],
+//     address: AddressInfo(
+//       address:
+//           "2/790,South Facing Ground Floor,Thiruvallur High Road,Gandhi Nagar",
+//       city: "Chennai",
+//       pincode: "600052",
+//     ),
+//   ),
+//   voucherInfo: VoucherInfo(
+//     voucherNo: "BAS23241",
+//     date: "2023-09-30",
+//     time: "2023-09-26T08:19:25.692492600Z",
+//     refNo: null,
+//     voucherName: "Sale",
+//     voucherType: "voucher_type:sale",
+//   ),
+//   partyInfo: PartyInfo(
+//     name: "VELAVAN HYPER MARKET PVT LTD",
+//     mobileNos: ["9566700835"],
+//     gstNo: "33AAHCV6142J1Z7",
+//     address: AddressInfo(
+//       address: "51 GIN FACTORY ROAD THOOTHUKUDI",
+//       pincode: "628002",
+//       state: "TAMILNADU",
+//       country: "INDIA",
+//     ),
+//   ),
+//   deliveryInfo: DeliveryInfo(),
+//   partyOutstanding: PartyOutstanding(),
+//   items: [
+//     SaleItem(
+//       name: "strepsils",
+//       precision: 2,
+//       qty: 5,
+//       rate: 4,
+//       mrp: 5,
+//       batchNo: "S1",
+//       rack: "",
+//       unit: "pcs",
+//       taxableValue: 4.92,
+//       taxRatio: 1.5,
+//       cgstAmount: 0.04,
+//       sgstAmount: 0.04,
+//       igstAmount: 0,
+//       cessAmount: 0,
+//       disc: AmountInfo(amount: 0.0, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "123",
+//       salesManName: "sinc1",
+//       hsnCode: "30049099",
+//     ),
+//     SaleItem(
+//       name: "COTTON ROLL",
+//       precision: 3,
+//       qty: 5,
+//       rate: 200,
+//       mrp: 200,
+//       batchNo: "CR01",
+//       rack: "",
+//       unit: "Kilogram",
+//       taxableValue: 177.68,
+//       taxRatio: 12,
+//       cgstAmount: 10.66,
+//       sgstAmount: 10.66,
+//       igstAmount: 0,
+//       cessAmount: 1,
+//       disc: AmountInfo(amount: 1, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "234",
+//       salesManName: "sinc2",
+//       hsnCode: "CR001",
+//     ),
+//   ],
+//   taxSummary: [
+//     TaxSummary(
+//       ratio: 1.5,
+//       value: 4.92,
+//       sgst: 0.04,
+//       cgst: 0.04,
+//       igst: 0,
+//       cess: 0,
+//     ),
+//     TaxSummary(
+//       ratio: 12,
+//       value: 177.68,
+//       sgst: 10.66,
+//       cgst: 10.66,
+//       igst: 0,
+//       cess: 1,
+//     ),
+//   ],
+//   discount: 0,
+//   rounded: 0.5,
+//   accountAdjustment: 0,
+//   shippingCharge: 0,
+//   netAmount: 205,
+//   patientName: "dia",
+//   doctorName: "Dr.Kannan",
+//   lut: true,
+//   billedBy: "dia",
+//   salesManName: null,
+//   description: null,
+//   qrCode: null,
+// );
+
 final saleData = SaleData(
   title: "Sale",
-  orgName: "MA MEDICALS",
+  orgName: "JN SUPER MARKET",
   branchInfo: BranchInfo(
     displayName: "DP ROAD",
-    gstNo: "33ANEPA4609G3ZI",
-    licNo: "",
-    phone: null,
-    email: null,
-    mobileNos: ["8575757546"],
+    gstNo: "33AANFV6837B1Z2",
+    phone: "04617485961",
+    mobileNos: ["7412589630", "8523697410"],
     address: AddressInfo(
-      address:
-          "2/790,South Facing Ground Floor,Thiruvallur High Road,Gandhi Nagar",
-      city: "Chennai",
-      pincode: "600052",
+      address: "43, Toovipuram Main",
+      city: "Thoothukudi",
+      pincode: null,
     ),
   ),
   voucherInfo: VoucherInfo(
-    voucherNo: "BAS23241",
+    voucherNo: "DP23244",
     date: "2023-09-30",
     time: "2023-09-26T08:19:25.692492600Z",
-    refNo: null,
+    refNo: "SL1",
     voucherName: "Sale",
     voucherType: "voucher_type:sale",
   ),
   partyInfo: PartyInfo(
-    name: "VELAVAN HYPER MARKET PVT LTD",
-    mobileNos: ["9566700835"],
-    gstNo: "33AAHCV6142J1Z7",
+    name: "Santhiyaa",
+    mobileNos: [],
     address: AddressInfo(
-      address: "51 GIN FACTORY ROAD THOOTHUKUDI",
-      pincode: "628002",
-      state: "TAMILNADU",
+      address: "12,Anna Nagar",
+      pincode: "628003",
+      state: "TN",
       country: "INDIA",
     ),
   ),
@@ -433,145 +552,165 @@ final saleData = SaleData(
   qrCode: null,
 );
 
-final saleLayoutAConfig = SalePdfLayoutAConfig(
+final saleLayoutAConfig = SaleLayoutAConfig(
   pageWidth: 78,
-  header: LayoutAHeader(
-    showOrganizationName: true,
-    showOrganizationAddress: true,
-    showOrganizationPhone: true,
-    showOrganizationDetails: true,
-    // showPartyInfo: false,
+  margin: 3,
+  showOrganizationAddress: true,
+  showOrganizationPhone: true,
+  title: "SALE",
+  item: ColumnConfig(
+    width: 1,
+    label: "PARTICULARS",
   ),
-  transactionInfo: LayoutATransactionInfo(
-    item: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "PARTICULARS",
-    ),
-    mrp: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "MRP",
-    ),
-    rate: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "RATE",
-    ),
-    qty: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "QTY",
-    ),
-    discount: TransactionConfig(
-      enabled: false,
-      width: 1,
-      label: "DISC",
-    ),
-    amount: TransactionConfig(
-      enabled: true,
-      width: 2,
-      label: "AMOUNT",
-    ),
+  mrp: ColumnConfig(
+    width: 1,
+    label: "MRP",
   ),
-  footer: LayoutAFooter(
-    termsAndConditions: [
-      "Kindly keep a Photo copy for future use",
-      "Exchange within 7 days"
-    ],
-    greetings: "Thank you visit us again...",
+  rate: ColumnConfig(
+    width: 1,
+    label: "RATE",
   ),
+  qty: ColumnConfig(
+    width: 1,
+    label: "QTY",
+  ),
+  discount: ColumnConfig(
+    width: 0,
+    label: "DISC",
+  ),
+  amount: ColumnConfig(
+    width: 1,
+    label: "AMOUNT",
+  ),
+  // termsAndConditions: [
+  //   "Kindly keep a Photo copy for future use",
+  //   "Exchange within 7 days"
+  // ],
+  // greetings: "Thank you visit us again...",
 );
 
-final saleLayoutBConfig = SalePdfLayoutBConfig(
+final saleLayoutBConfig = SaleLayoutBConfig(
+  pageWidth: 210,
+  pageHeight: 297,
+  margin: 5,
+  orientation: "portrait",
+  showOrganizationName: true,
+  showOrganizationAddress: true,
+  showOrganizationPhone: true,
+  showOrganizationDetails: true,
+  showPartyInfo: true,
+  showVoucherInfo: true,
+  serialNo: ColumnConfig(
+    width: 0.5,
+    label: "#",
+  ),
+  item: ColumnConfig(
+    width: 1.5,
+    label: "ITEMS",
+  ),
+  qty: ColumnConfig(
+    width: 1,
+    label: "QTY",
+  ),
+  mrp: ColumnConfig(
+    width: 1,
+    label: "MRP",
+  ),
+  rate: ColumnConfig(
+    width: 1,
+    label: "RATE",
+  ),
+  hsnCode: ColumnConfig(
+    width: 1,
+    label: "HSN",
+  ),
+  unit: ColumnConfig(
+    width: 1,
+    label: "UNIT",
+  ),
+  taxableValue: ColumnConfig(
+    width: 1.5,
+    label: "TAXABLE VALUE",
+  ),
+  taxAmount: ColumnConfig(
+    width: 1.5,
+    label: "TAX AMOUNT",
+  ),
+  taxRatio: ColumnConfig(
+    width: 1,
+    label: "TAX %",
+  ),
+  discount: ColumnConfig(
+    width: 1,
+    label: "DISC",
+  ),
+  amount: ColumnConfig(
+    width: 1.5,
+    label: "AMOUNT",
+  ),
+  showGSTSummary: false,
+  showBillDetails: false,
+  showBankDetails: BankDetails(
+    enabled: false,
+    bankName: "ICIC BANK LTD",
+    acName: "JN SUPER MARKET",
+    acNo: "613905023899",
+    ifscCode: "ICIC0006139",
+    panNo: "AARFJ3294N",
+  ),
+  showBalanceDetails: false,
+  termsAndConditions: [
+    "Kindly keep a Photo copy for future use",
+    "Exchange within 7 days"
+  ],
+  greetings: null,
+);
+
+final saleLayoutA6Config = SaleLayoutA6Config(
   pageWidth: 148,
   pageHeight: 105,
-  header: LayoutBHeader(
-    showOrganizationName: true,
-    showOrganizationAddress: true,
-    showOrganizationPhone: true,
-    showOrganizationDetails: true,
-    showPartyInfo: true,
-    showVoucherInfo: true,
+  margin: 5,
+  showOrganizationName: true,
+  showOrganizationAddress: true,
+  showOrganizationPhone: true,
+  showOrganizationDetails: true,
+  showContactInfo: true,
+  item: ColumnConfig(
+    width: 2,
+    label: "PARTICULARS",
   ),
-  transactionInfo: LayoutBTransactionInfo(
-    serialNo: TransactionConfig(
-      enabled: true,
-      width: 0.5,
-      label: "#",
-    ),
-    item: TransactionConfig(
-      enabled: true,
-      width: 1.5,
-      label: "PARTICULARS",
-    ),
-    qty: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "QTY",
-    ),
-    mrp: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "MRP",
-    ),
-    rate: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "RATE",
-    ),
-    hsnCode: TransactionConfig(
-      enabled: false,
-      width: 1,
-      label: "HSN",
-    ),
-    unit: TransactionConfig(
-      enabled: false,
-      width: 1,
-      label: "UNIT",
-    ),
-    taxableValue: TransactionConfig(
-      enabled: false,
-      width: 1.5,
-      label: "TAXABLE VALUE",
-    ),
-    taxAmount: TransactionConfig(
-      enabled: false,
-      width: 1.5,
-      label: "TAX AMOUNT",
-    ),
-    taxRatio: TransactionConfig(
-      enabled: true,
-      width: 1,
-      label: "TAX %",
-    ),
-    discount: TransactionConfig(
-      enabled: false,
-      width: 1,
-      label: "DISC",
-    ),
-    amount: TransactionConfig(
-      enabled: true,
-      width: 1.5,
-      label: "AMOUNT",
-    ),
+  rack: ColumnConfig(
+    width: 1,
+    label: "RACK",
   ),
-  footer: LayoutBFooter(
-    showGSTSummary: true,
-    showBankDetails: BankDetails(
-      enabled: true,
-      bankName: "ICIC BANK LTD",
-      acName: "JN SUPER MARKET",
-      acNo: "613905023899",
-      ifscCode: "ICIC0006139",
-      panNo: "AARFJ3294N",
-    ),
-    showBillDetails: false,
-    showBalanceDetails: true,
-    termsAndConditions: [
-      // "Kindly keep a Photo copy for future use",
-      // "Exchange within 7 days"
-    ],
-    greetings: null,
+  batchNo: ColumnConfig(
+    width: 1,
+    label: "BATCH",
   ),
+  expiry: ColumnConfig(
+    width: 1,
+    label: "EXP",
+  ),
+  qty: ColumnConfig(
+    width: 1,
+    label: "QTY",
+  ),
+  mrp: ColumnConfig(
+    width: 1,
+    label: "MRP",
+  ),
+  rate: ColumnConfig(
+    width: 1,
+    label: "RATE",
+  ),
+  discount: ColumnConfig(
+    width: 1,
+    label: "DISC",
+  ),
+  amount: ColumnConfig(
+    width: 1,
+    label: "AMOUNT",
+  ),
+  showGSTSummary: false,
+  showBillDetails: false,
 );
