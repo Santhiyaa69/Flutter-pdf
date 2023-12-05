@@ -19,6 +19,8 @@ import 'common/branch_info.dart';
 import 'sale/input.dart';
 import 'package:print_pdf/sale/sale_78mm.dart';
 import 'sale/sale_a6.dart';
+import 'sale_quotation/input.dart';
+import 'sale_quotation/sale_quotation_a4.dart';
 
 // import 'sale_register/sale_register_detail.dart';
 // import 'sale_register/sale_register_view.dart';
@@ -103,10 +105,11 @@ class Home extends StatelessWidget {
 
                 // reorderAnalysis(reorderAnalysisData);
 
-                // sale78mm(saleData);
                 // buildSaleLayoutA(saleData, saleLayoutAConfig);
-                buildSaleLayoutB(saleData, saleLayoutBConfig);
-            // buildSaleLayoutA6(saleData, saleLayoutA6Config);
+                // buildSaleLayoutB(saleData, saleLayoutBConfig);
+                // buildSaleLayoutA6(saleData, saleLayoutA6Config);
+                buildSaleQuotationLayout(
+                    saleQuotationData, saleQuotationConfig);
           },
         ),
       ),

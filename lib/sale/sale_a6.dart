@@ -12,6 +12,13 @@ FutureOr<Uint8List> buildSaleLayoutA6(
   SaleData data,
   SaleLayoutA6Config config,
 ) {
+  Widget buildDivider({double? height}) {
+    return Divider(
+      height: height ?? 0,
+      color: PdfColors.grey800,
+    );
+  }
+
   final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
   final pageFormat = PdfPageFormat(
     mm(config.pageWidth),
@@ -56,21 +63,18 @@ FutureOr<Uint8List> buildSaleLayoutA6(
           defaultTextStyle: TextStyle(
             fontSize: 9,
             font: Font.courier(),
-            letterSpacing: -0.2,
           ),
           header0: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
-            letterSpacing: -0.2,
           ),
           header1: TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
-            letterSpacing: -0.2,
           ),
           header2: TextStyle(
             fontSize: 10,
@@ -79,7 +83,12 @@ FutureOr<Uint8List> buildSaleLayoutA6(
             fontWeight: FontWeight.bold,
             decoration: TextDecoration.underline,
             decorationColor: PdfColors.grey800,
-            letterSpacing: -0.2,
+          ),
+          header3: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+            font: Font.courier(),
+            fontBold: Font.courierBold(),
           ),
         ),
         buildBackground: (context) {
@@ -106,7 +115,7 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                 children: [
                   Table(
                     columnWidths: {
-                      0: const FlexColumnWidth(1.3),
+                      0: const FlexColumnWidth(1.2),
                       1: const FlexColumnWidth(1),
                     },
                     children: [
@@ -269,7 +278,7 @@ FutureOr<Uint8List> buildSaleLayoutA6(
               ),
             ],
           ),
-          Divider(color: PdfColors.grey800, height: 0),
+          buildDivider(),
           if (config.showContactInfo)
             if (data.patientName != null && data.doctorName != null) ...[
               Table(
@@ -315,7 +324,7 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                   ),
                 ],
               ),
-              Divider(color: PdfColors.grey800, height: 0),
+              buildDivider(),
             ],
           Table(
             columnWidths: colWidths.asMap(),
@@ -588,7 +597,7 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                                   Padding(
                                     padding: const EdgeInsets.all(1),
                                     child: Text(
-                                      tax.ratio.toStringAsFixed(2),
+                                      '${tax.ratio.toStringAsFixed(2)}%',
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -735,15 +744,15 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                                     children: [
                                       Text(
                                         "NET AMOUNT",
-                                        style: Theme.of(context).header0,
+                                        style: Theme.of(context).header3,
                                       ),
                                       Text(
                                         ":",
-                                        style: Theme.of(context).header0,
+                                        style: Theme.of(context).header3,
                                       ),
                                       Text(
                                         data.netAmount.toStringAsFixed(2),
-                                        style: Theme.of(context).header0,
+                                        style: Theme.of(context).header3,
                                         textAlign: TextAlign.end,
                                       ),
                                     ],
@@ -759,7 +768,7 @@ FutureOr<Uint8List> buildSaleLayoutA6(
               ),
             ],
           ),
-          Divider(color: PdfColors.grey800, height: 0),
+          buildDivider(),
         ];
       },
     ),

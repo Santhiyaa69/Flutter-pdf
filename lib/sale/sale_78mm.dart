@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../common/voucher_header.dart';
 import '../main.dart';
 import 'input.dart';
 
@@ -18,56 +19,56 @@ FutureOr<Uint8List> buildSaleLayoutA(
     );
   }
 
-  Widget buildHeader(Context context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          data.orgName,
-          style: Theme.of(context).header1,
-        ),
-        if (config.showOrganizationAddress) ...[
-          if (data.branchInfo.address.address != null)
-            Text(
-              data.branchInfo.address.address!,
-            ),
-          if (data.branchInfo.address.city != null)
-            Text(
-              '${data.branchInfo.address.city!}-${data.branchInfo.address.pincode ?? 1}',
-            ),
-        ],
-        if (config.showOrganizationPhone)
-          if (data.branchInfo.phone != null)
-            Text(
-              "Phone: ${data.branchInfo.phone}",
-            ),
-        if (config.showOrganizationMobile)
-          if (data.branchInfo.mobileNos != null &&
-              data.branchInfo.mobileNos!.isNotEmpty)
-            Text(
-              "Mobile: ${data.branchInfo.mobileNos?.join(",").toString()}",
-            ),
-        if (config.showOrganizationEmail)
-          if (data.branchInfo.email != null)
-            Text(
-              "Email: ${data.branchInfo.email}",
-            ),
-        if (config.showGstNo)
-          Text(
-            "GSTIN: ${data.branchInfo.gstNo}",
-          ),
-        if (config.showLicNo)
-          if (data.branchInfo.licNo != null)
-            Text(
-              "LIC.NO: ${data.branchInfo.licNo}",
-            ),
-        Text(
-          data.voucherInfo.voucherName,
-          style: Theme.of(context).header1,
-        ),
-      ],
-    );
-  }
+  // Widget buildHeader(Context context) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Text(
+  //         data.orgName,
+  //         style: Theme.of(context).header1,
+  //       ),
+  //       if (config.showOrganizationAddress) ...[
+  //         if (data.branchInfo.address.address != null)
+  //           Text(
+  //             data.branchInfo.address.address!,
+  //           ),
+  //         if (data.branchInfo.address.city != null)
+  //           Text(
+  //             '${data.branchInfo.address.city!}-${data.branchInfo.address.pincode ?? 1}',
+  //           ),
+  //       ],
+  //       if (config.showOrganizationPhone)
+  //         if (data.branchInfo.phone != null)
+  //           Text(
+  //             "Phone: ${data.branchInfo.phone}",
+  //           ),
+  //       if (config.showOrganizationMobile)
+  //         if (data.branchInfo.mobileNo != null &&
+  //             data.branchInfo.mobileNo!.isNotEmpty)
+  //           Text(
+  //             "Mobile: ${data.branchInfo.mobileNo?.join(",").toString()}",
+  //           ),
+  //       if (config.showOrganizationEmail)
+  //         if (data.branchInfo.email != null)
+  //           Text(
+  //             "Email: ${data.branchInfo.email}",
+  //           ),
+  //       if (config.showGstNo)
+  //         Text(
+  //           "GSTIN: ${data.branchInfo.gstNo}",
+  //         ),
+  //       if (config.showLicNo)
+  //         if (data.branchInfo.licNo != null)
+  //           Text(
+  //             "LIC.NO: ${data.branchInfo.licNo}",
+  //           ),
+  //       Text(
+  //         data.voucherInfo.voucherName,
+  //         style: Theme.of(context).header1,
+  //       ),
+  //     ],
+  //   );
+  // }
 
   final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
 
@@ -119,7 +120,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
             fontBold: Font.courierBold(),
           ),
           header1: TextStyle(
-            fontSize: 15,
+            fontSize: 11,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
@@ -129,7 +130,18 @@ FutureOr<Uint8List> buildSaleLayoutA(
       build: (context) {
         return Column(
           children: [
-            buildHeader(context),
+            buildVoucherHeader(
+              context: context,
+              orgName: data.orgName,
+              branchInfo: data.branchInfo,
+              showOrganizationAddress: config.showOrganizationAddress,
+              showOrganizationPhone: config.showOrganizationPhone,
+              showOrganizationMobile: config.showOrganizationMobile,
+              showOrganizationEmail: config.showOrganizationEmail,
+              showGstNo: config.showGstNo,
+              showLicNo: config.showLicNo,
+            ),
+            // buildHeader(context),
             buildDivider(),
             Table(
               columnWidths: {

@@ -1,25 +1,9 @@
+import '../common/amount_info.dart';
 import '../common/branch_info.dart';
+import '../common/delivery_info.dart';
+import '../common/tax_summary.dart';
 import '../common/voucher_info.dart';
 import '../main.dart';
-
-class DeliveryInfo {
-  final String? date;
-  final String? transport;
-  DeliveryInfo({
-    this.date,
-    this.transport,
-  });
-}
-
-class AmountInfo {
-  final String mode;
-  final double amount;
-
-  AmountInfo({
-    required this.mode,
-    required this.amount,
-  });
-}
 
 class PartyOutstanding {
   final double previousBal;
@@ -76,24 +60,6 @@ class SaleItem {
     this.reduction = 0.0,
     this.salesManCode,
     this.salesManName,
-  });
-}
-
-class TaxSummary {
-  final double ratio;
-  final double value;
-  final double sgst;
-  final double cgst;
-  final double igst;
-  final double cess;
-
-  TaxSummary({
-    required this.ratio,
-    required this.value,
-    required this.sgst,
-    required this.cgst,
-    required this.igst,
-    required this.cess,
   });
 }
 
@@ -218,10 +184,12 @@ class SaleLayoutBConfig {
   final double pageHeight;
   final double margin;
   final String orientation;
-  final bool showOrganizationName;
   final bool showOrganizationAddress;
   final bool showOrganizationPhone;
-  final bool showOrganizationDetails;
+  final bool showOrganizationMobile;
+  final bool showOrganizationEmail;
+  final bool showGstNo;
+  final bool showLicNo;
   final bool showPartyInfo;
   final bool showVoucherInfo;
   final bool showContactInfo; //[patient and doctor]
@@ -248,11 +216,13 @@ class SaleLayoutBConfig {
     required this.pageWidth,
     required this.pageHeight,
     required this.margin,
-    this.orientation = "landscape",
-    this.showOrganizationName = false,
+    this.orientation = "portrait",
     this.showOrganizationAddress = false,
     this.showOrganizationPhone = false,
-    this.showOrganizationDetails = false,
+    this.showOrganizationMobile = false,
+    this.showOrganizationEmail = false,
+    this.showGstNo = false,
+    this.showLicNo = false,
     this.showPartyInfo = false,
     this.showVoucherInfo = false,
     this.showContactInfo = false,
@@ -342,7 +312,7 @@ class SaleLayoutA6Config {
 //     ),
 //   ),
 //   voucherInfo: VoucherInfo(
-//     voucherNo: "BAS23241",
+//     voucherNo: "BASSALE23241",
 //     date: "2023-09-30",
 //     time: "2023-09-26T08:19:25.692492600Z",
 //     refNo: null,
@@ -440,35 +410,263 @@ class SaleLayoutA6Config {
 //   qrCode: null,
 // );
 
+// final saleData = SaleData(
+//   title: "Sale",
+//   orgName: "JN SUPER MARKET",
+//   branchInfo: BranchInfo(
+//     displayName: "DP ROAD",
+//     gstNo: "33AANFV6837B1Z2",
+//     phone: "04617485961",
+//     mobileNos: ["7412589630", "8523697410"],
+//     address: AddressInfo(
+//       address: "43, Toovipuram Main",
+//       city: "Thoothukudi",
+//       pincode: null,
+//     ),
+//   ),
+//   voucherInfo: VoucherInfo(
+//     voucherNo: "DP23244",
+//     date: "2023-09-30",
+//     time: "2023-09-26T08:19:25.692492600Z",
+//     refNo: "SL1",
+//     voucherName: "Sale",
+//     voucherType: "voucher_type:sale",
+//   ),
+//   partyInfo: PartyInfo(
+//     name: "Santhiyaa",
+//     mobileNos: [],
+//     address: AddressInfo(
+//       address: "12,Anna Nagar",
+//       pincode: "628003",
+//       state: "TN",
+//       country: "INDIA",
+//     ),
+//   ),
+//   deliveryInfo: DeliveryInfo(),
+//   partyOutstanding: PartyOutstanding(),
+//   items: [
+//     SaleItem(
+//       name: "strepsils",
+//       precision: 2,
+//       qty: 5,
+//       rate: 4,
+//       mrp: 5,
+//       batchNo: "S1",
+//       rack: "",
+//       unit: "pcs",
+//       taxableValue: 4.92,
+//       taxRatio: 1.5,
+//       cgstAmount: 0.04,
+//       sgstAmount: 0.04,
+//       igstAmount: 0,
+//       cessAmount: 0,
+//       disc: AmountInfo(amount: 0.0, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "123",
+//       salesManName: "sinc1",
+//       hsnCode: "30049099",
+//     ),
+//     SaleItem(
+//       name: "COTTON ROLL",
+//       precision: 3,
+//       qty: 5,
+//       rate: 200,
+//       mrp: 200,
+//       batchNo: "CR01",
+//       rack: "",
+//       unit: "Kilogram",
+//       taxableValue: 177.68,
+//       taxRatio: 12,
+//       cgstAmount: 10.66,
+//       sgstAmount: 10.66,
+//       igstAmount: 0,
+//       cessAmount: 1,
+//       disc: AmountInfo(amount: 1, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "234",
+//       salesManName: "sinc2",
+//       hsnCode: "CR001",
+//     ),
+//   ],
+//   taxSummary: [
+//     TaxSummary(
+//       ratio: 1.5,
+//       value: 4.92,
+//       sgst: 0.04,
+//       cgst: 0.04,
+//       igst: 0,
+//       cess: 0,
+//     ),
+//     TaxSummary(
+//       ratio: 12,
+//       value: 177.68,
+//       sgst: 10.66,
+//       cgst: 10.66,
+//       igst: 0,
+//       cess: 1,
+//     ),
+//   ],
+//   discount: 0,
+//   rounded: 0.5,
+//   accountAdjustment: 0,
+//   shippingCharge: 0,
+//   netAmount: 205,
+//   patientName: null,
+//   doctorName: null,
+//   lut: false,
+//   billedBy: "dia",
+//   salesManName: null,
+//   description: null,
+//   qrCode: null,
+// );
+
+// final saleData = SaleData(
+//   title: "Sale",
+//   orgName: "12 BASKETS",
+//   branchInfo: BranchInfo(
+//     displayName: "DP ROAD",
+//     gstNo: "33ABTPN8566A1ZD",
+//     licNo: "22421328000244",
+//     phone: "",
+//     mobileNos: ["90255 54419"],
+//     address: AddressInfo(
+//       address: "NO.1/109,NORTH  STREET,KOVANKADU,PALAYAKAYAL",
+//       city: "THOOTHUKUDI",
+//       pincode: "628152",
+//     ),
+//   ),
+//   voucherInfo: VoucherInfo(
+//     voucherNo: "BAS23241",
+//     date: "2023-09-30",
+//     time: "",
+//     refNo: null,
+//     voucherName: "Sale",
+//     voucherType: "voucher_type:sale",
+//   ),
+//   partyInfo: PartyInfo(
+//     name: "VELAVAN HYPER MARKET PVT LTD",
+//     mobileNos: ["9566700835"],
+//     gstNo: "33AAHCV6142J1Z7",
+//     address: AddressInfo(
+//       address: "51 GIN FACTORY ROAD THOOTHUKUDI",
+//       pincode: "628002",
+//       state: "TAMILNADU",
+//       country: "INDIA",
+//     ),
+//   ),
+//   deliveryInfo: DeliveryInfo(),
+//   partyOutstanding: PartyOutstanding(),
+//   items: [
+//     SaleItem(
+//       name: "strepsils",
+//       precision: 2,
+//       qty: 5,
+//       rate: 4,
+//       mrp: 5,
+//       batchNo: "S1",
+//       rack: "",
+//       unit: "pcs",
+//       taxableValue: 4.92,
+//       taxRatio: 1.5,
+//       cgstAmount: 0.04,
+//       sgstAmount: 0.04,
+//       igstAmount: 0,
+//       cessAmount: 0,
+//       disc: AmountInfo(amount: 0.0, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "123",
+//       salesManName: "sinc1",
+//       hsnCode: "30049099",
+//     ),
+//     SaleItem(
+//       name: "COTTON ROLL",
+//       precision: 3,
+//       qty: 5,
+//       rate: 200,
+//       mrp: 200,
+//       batchNo: "CR01",
+//       rack: "",
+//       unit: "Kilogram",
+//       taxableValue: 177.68,
+//       taxRatio: 12,
+//       cgstAmount: 10.66,
+//       sgstAmount: 10.66,
+//       igstAmount: 0,
+//       cessAmount: 1,
+//       disc: AmountInfo(amount: 1, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "234",
+//       salesManName: "sinc2",
+//       hsnCode: "CR001",
+//     ),
+//   ],
+//   taxSummary: [
+//     TaxSummary(
+//       ratio: 1.5,
+//       value: 4.92,
+//       sgst: 0.04,
+//       cgst: 0.04,
+//       igst: 0,
+//       cess: 0,
+//     ),
+//     TaxSummary(
+//       ratio: 12,
+//       value: 177.68,
+//       sgst: 10.66,
+//       cgst: 10.66,
+//       igst: 0,
+//       cess: 1,
+//     ),
+//   ],
+//   discount: 0,
+//   rounded: 0.5,
+//   accountAdjustment: 0,
+//   shippingCharge: 0,
+//   netAmount: 205,
+//   patientName: null,
+//   doctorName: null,
+//   lut: false,
+//   billedBy: "dia",
+//   salesManName: null,
+//   description: null,
+//   qrCode: null,
+// );
+
 final saleData = SaleData(
   title: "Sale",
-  orgName: "JN SUPER MARKET",
+  orgName: "TEST ORG",
   branchInfo: BranchInfo(
     displayName: "DP ROAD",
-    gstNo: "33AANFV6837B1Z2",
-    phone: "04617485961",
-    mobileNos: ["7412589630", "8523697410"],
+    gstNo: "33AIVPV0468N1ZC",
+    phone: "04612383801",
+    mobileNos: ["9842019102", "7373776102"],
     address: AddressInfo(
-      address: "43, Toovipuram Main",
-      city: "Thoothukudi",
-      pincode: null,
+      address: "2nd FLOOR,45,GIN FACTORY ROAD",
+      city: "TUTICORIN",
+      pincode: "628002",
     ),
   ),
   voucherInfo: VoucherInfo(
-    voucherNo: "DP23244",
-    date: "2023-09-30",
+    voucherNo: "MBBB23242758",
+    date: "2023-11-21",
     time: "2023-09-26T08:19:25.692492600Z",
-    refNo: "SL1",
+    refNo: null,
     voucherName: "Sale",
     voucherType: "voucher_type:sale",
   ),
   partyInfo: PartyInfo(
-    name: "Santhiyaa",
-    mobileNos: [],
+    name: "PHILIPS FOOD INDIA PVT.LTD.",
+    mobileNos: ["9944003179"],
+    gstNo: "33AABCP7916Q2ZW",
     address: AddressInfo(
-      address: "12,Anna Nagar",
-      pincode: "628003",
-      state: "TN",
+      address:
+          "PLOT NO.C-75/76, SIPCOT INDUSTRIAL COMPLEX,MADATHOOR P.O.,TUTICORIN",
+      pincode: "628008",
+      state: "TAMILNADU",
       country: "INDIA",
     ),
   ),
@@ -545,12 +743,127 @@ final saleData = SaleData(
   netAmount: 205,
   patientName: null,
   doctorName: null,
-  lut: false,
+  lut: true,
   billedBy: "dia",
   salesManName: null,
   description: null,
   qrCode: null,
 );
+
+// final saleData = SaleData(
+//   title: "Sale",
+//   orgName: "G.V Batteries",
+//   branchInfo: BranchInfo(
+//     displayName: "DP ROAD",
+//     gstNo: "33BHWPP6438F1ZU",
+//     phone: null,
+//     mobileNos: ["9994113408"],
+//     email: "gvbatteriestuticorin@gmail.com",
+//     address: AddressInfo(
+//       address: "122B,POLPETTAI,ETTAYAPURAM ROAD",
+//       city: "TUTICORIN",
+//       pincode: "628002",
+//     ),
+//   ),
+//   voucherInfo: VoucherInfo(
+//     voucherNo: "GVB23241312",
+//     date: "2023-11-21",
+//     time: "2023-09-26T08:19:25.692492600Z",
+//     refNo: null,
+//     voucherName: "Sale",
+//     voucherType: "voucher_type:sale",
+//   ),
+//   partyInfo: PartyInfo(
+//     name: "JES POWER TECHNOLOGIES",
+//     mobileNos: ["9944003179"],
+//     gstNo: "33AABCP7916Q2ZW",
+//     address: AddressInfo(
+//       address:
+//           "PLOT NO.C-75/76, SIPCOT INDUSTRIAL COMPLEX,MADATHOOR P.O.,TUTICORIN",
+//       pincode: "628008",
+//       state: "TAMILNADU",
+//       country: "INDIA",
+//     ),
+//   ),
+//   deliveryInfo: DeliveryInfo(),
+//   partyOutstanding: PartyOutstanding(),
+//   items: [
+//     SaleItem(
+//       name: "strepsils",
+//       precision: 2,
+//       qty: 5,
+//       rate: 4,
+//       mrp: 5,
+//       batchNo: "S1",
+//       rack: "",
+//       unit: "pcs",
+//       taxableValue: 4.92,
+//       taxRatio: 1.5,
+//       cgstAmount: 0.04,
+//       sgstAmount: 0.04,
+//       igstAmount: 0,
+//       cessAmount: 0,
+//       disc: AmountInfo(amount: 0.0, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "123",
+//       salesManName: "sinc1",
+//       hsnCode: "30049099",
+//     ),
+//     SaleItem(
+//       name: "COTTON ROLL",
+//       precision: 3,
+//       qty: 5,
+//       rate: 200,
+//       mrp: 200,
+//       batchNo: "CR01",
+//       rack: "",
+//       unit: "Kilogram",
+//       taxableValue: 177.68,
+//       taxRatio: 12,
+//       cgstAmount: 10.66,
+//       sgstAmount: 10.66,
+//       igstAmount: 0,
+//       cessAmount: 1,
+//       disc: AmountInfo(amount: 1, mode: 'P'),
+//       dAmount: 0,
+//       reduction: 0,
+//       salesManCode: "234",
+//       salesManName: "sinc2",
+//       hsnCode: "CR001",
+//     ),
+//   ],
+//   taxSummary: [
+//     TaxSummary(
+//       ratio: 1.5,
+//       value: 4.92,
+//       sgst: 0.04,
+//       cgst: 0.04,
+//       igst: 0,
+//       cess: 0,
+//     ),
+//     TaxSummary(
+//       ratio: 12,
+//       value: 177.68,
+//       sgst: 10.66,
+//       cgst: 10.66,
+//       igst: 0,
+//       cess: 1,
+//     ),
+//   ],
+//   discount: 0,
+//   rounded: 0.5,
+//   accountAdjustment: 0,
+//   shippingCharge: 0,
+//   netAmount: 205,
+//   patientName: null,
+//   doctorName: null,
+//   lut: false,
+//   billedBy: "dia",
+//   salesManName: null,
+//   description: null,
+//   qrCode: null,
+// );
 
 final saleLayoutAConfig = SaleLayoutAConfig(
   pageWidth: 78,
@@ -594,10 +907,9 @@ final saleLayoutBConfig = SaleLayoutBConfig(
   pageHeight: 297,
   margin: 5,
   orientation: "portrait",
-  showOrganizationName: true,
   showOrganizationAddress: true,
   showOrganizationPhone: true,
-  showOrganizationDetails: true,
+  showGstNo: true,
   showPartyInfo: true,
   showVoucherInfo: true,
   serialNo: ColumnConfig(
@@ -606,7 +918,7 @@ final saleLayoutBConfig = SaleLayoutBConfig(
   ),
   item: ColumnConfig(
     width: 1.5,
-    label: "ITEMS",
+    label: "PARTICULARS",
   ),
   qty: ColumnConfig(
     width: 1,
@@ -625,15 +937,15 @@ final saleLayoutBConfig = SaleLayoutBConfig(
     label: "HSN",
   ),
   unit: ColumnConfig(
-    width: 1,
+    width: 0,
     label: "UNIT",
   ),
   taxableValue: ColumnConfig(
-    width: 1.5,
+    width: 1,
     label: "TAXABLE VALUE",
   ),
   taxAmount: ColumnConfig(
-    width: 1.5,
+    width: 0,
     label: "TAX AMOUNT",
   ),
   taxRatio: ColumnConfig(
@@ -648,23 +960,101 @@ final saleLayoutBConfig = SaleLayoutBConfig(
     width: 1.5,
     label: "AMOUNT",
   ),
-  showGSTSummary: false,
+  showGSTSummary: true,
   showBillDetails: false,
   showBankDetails: BankDetails(
-    enabled: false,
-    bankName: "ICIC BANK LTD",
-    acName: "JN SUPER MARKET",
-    acNo: "613905023899",
-    ifscCode: "ICIC0006139",
-    panNo: "AARFJ3294N",
+    enabled: true,
+    bankName: "HDFC BANK LTD",
+    acName: "VELAVAN HYPERMARKET BOOKS & STATIONERY",
+    acNo: "50200071241571",
+    ifscCode: "HDFC0001104",
+    panNo: "AIVPV0468N",
   ),
-  showBalanceDetails: false,
+  showBalanceDetails: true,
   termsAndConditions: [
-    "Kindly keep a Photo copy for future use",
-    "Exchange within 7 days"
+    // "Kindly keep a Photo copy for future use",
+    // "Exchange within 7 days"
   ],
   greetings: null,
 );
+
+// final saleLayoutBConfig = SaleLayoutBConfig(
+//   pageWidth: 148,
+//   pageHeight: 210,
+//   margin: 5,
+//   orientation: "portrait",
+//   showOrganizationName: true,
+//   showOrganizationAddress: true,
+//   showOrganizationPhone: true,
+//   showOrganizationDetails: true,
+//   showPartyInfo: true,
+//   showVoucherInfo: true,
+//   serialNo: ColumnConfig(
+//     width: 0.5,
+//     label: "#",
+//   ),
+//   item: ColumnConfig(
+//     width: 1.5,
+//     label: "PARTICULARS",
+//   ),
+//   qty: ColumnConfig(
+//     width: 1,
+//     label: "QTY",
+//   ),
+//   mrp: ColumnConfig(
+//     width: 0,
+//     label: "MRP",
+//   ),
+//   rate: ColumnConfig(
+//     width: 1,
+//     label: "RATE",
+//   ),
+//   hsnCode: ColumnConfig(
+//     width: 1,
+//     label: "HSN/SAC",
+//   ),
+//   unit: ColumnConfig(
+//     width: 0,
+//     label: "UNIT",
+//   ),
+//   taxableValue: ColumnConfig(
+//     width: 0,
+//     label: "TAXABLE VALUE",
+//   ),
+//   taxAmount: ColumnConfig(
+//     width: 0,
+//     label: "TAX AMOUNT",
+//   ),
+//   taxRatio: ColumnConfig(
+//     width: 1,
+//     label: "GST %",
+//   ),
+//   discount: ColumnConfig(
+//     width: 0,
+//     label: "DISC%",
+//   ),
+//   amount: ColumnConfig(
+//     width: 1.5,
+//     label: "AMOUNT",
+//   ),
+//   showGSTSummary: true,
+//   showBillDetails: true,
+//   showBankDetails: BankDetails(
+//     enabled: true,
+//     bankName: "HDFC BANK LTD",
+//     acName: "VELAVAN HYPERMARKET BOOKS & STATIONERY",
+//     acNo: "50200071241571",
+//     ifscCode: "HDFC0001104",
+//     panNo: "AIVPV0468N",
+//   ),
+//   showBalanceDetails: false,
+//   termsAndConditions: [
+//     // "Kindly keep a Photo copy for future use",
+//     // "Exchange within 7 days"
+//     // "Goods Once Sold Will Not Be Taken Back"
+//   ],
+//   greetings: "Thank you visit us Again",
+// );
 
 final saleLayoutA6Config = SaleLayoutA6Config(
   pageWidth: 148,
@@ -712,5 +1102,5 @@ final saleLayoutA6Config = SaleLayoutA6Config(
     label: "AMOUNT",
   ),
   showGSTSummary: false,
-  showBillDetails: false,
+  showBillDetails: true,
 );

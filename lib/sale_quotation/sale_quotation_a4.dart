@@ -10,11 +10,11 @@ import '../common/voucher_header.dart';
 import '../main.dart';
 import 'input.dart';
 
-FutureOr<Uint8List> buildSaleLayoutB(
-  SaleData data,
-  SaleLayoutBConfig config,
+FutureOr<Uint8List> buildSaleQuotationLayout(
+  SaleQuotationData data,
+  SaleQuotationConfig config,
 ) {
-  partyInfoAddr1(SaleData data) {
+  partyInfoAddr1(SaleQuotationData data) {
     if (data.partyInfo.address?.city != null &&
         data.partyInfo.address?.pincode != null) {
       return '${data.partyInfo.address!.city!}-${data.partyInfo.address!.pincode!}';
@@ -25,7 +25,7 @@ FutureOr<Uint8List> buildSaleLayoutB(
     }
   }
 
-  partyInfoAddr2(SaleData data) {
+  partyInfoAddr2(SaleQuotationData data) {
     if (data.partyInfo.address?.state != null &&
         data.partyInfo.address?.country != null) {
       return '${data.partyInfo.address!.state!},${data.partyInfo.address!.country!}';
@@ -36,59 +36,60 @@ FutureOr<Uint8List> buildSaleLayoutB(
     }
   }
 
-  Widget buildSaleVoucherHeader(
-    Context context,
-    SaleLayoutBConfig config,
-    SaleData data,
-  ) {
-    return Center(
-      child: Column(
-          crossAxisAlignment: data.qrCode != null && data.qrCode!.isNotEmpty
-              ? CrossAxisAlignment.start
-              : CrossAxisAlignment.center,
-          children: [
-            Text(data.orgName, style: Theme.of(context).header0),
-            if (config.showOrganizationAddress) ...[
-              if (data.branchInfo.address.address != null)
-                Text(
-                  data.branchInfo.address.address!,
-                  style: Theme.of(context).header1,
-                ),
-              if (data.branchInfo.address.city != null)
-                Text(
-                  '${data.branchInfo.address.city!} - ${data.branchInfo.address.pincode ?? 1}',
-                  style: Theme.of(context).header1,
-                ),
-            ],
-            if (config.showOrganizationPhone) ...[
-              if (data.branchInfo.phone != null)
-                Text(
-                  "Phone: ${data.branchInfo.phone}",
-                  style: Theme.of(context).header1,
-                ),
-              if (data.branchInfo.mobileNos != null)
-                Text(
-                  "Mobile: ${data.branchInfo.mobileNos?.join(",").toString()}",
-                  style: Theme.of(context).header1,
-                ),
-              if (data.branchInfo.email != null)
-                Text(
-                  "Email: ${data.branchInfo.email}",
-                  style: Theme.of(context).header1,
-                ),
-            ],
-            Text(
-              "GSTIN: ${data.branchInfo.gstNo}",
-              style: Theme.of(context).header1,
-            ),
-            if (data.branchInfo.licNo != null)
-              Text(
-                "LIC.NO: ${data.branchInfo.licNo}",
-                style: Theme.of(context).header1,
-              ),
-          ]),
-    );
-  }
+  // Widget buildSaleQuotationVoucherHeader(
+  //   Context context,
+  //   SaleQuotationConfig config,
+  //   SaleQuotationData data,
+  // ) {
+  //   return Center(
+  //     child: Column(
+  //       children: [
+  //         if (config.showOrganizationName)
+  //           Text(data.orgName, style: Theme.of(context).header0),
+  //         if (config.showOrganizationAddress) ...[
+  //           if (data.branchInfo.address.address != null)
+  //             Text(
+  //               data.branchInfo.address.address!,
+  //               style: Theme.of(context).header1,
+  //             ),
+  //           if (data.branchInfo.address.city != null)
+  //             Text(
+  //               '${data.branchInfo.address.city!} - ${data.branchInfo.address.pincode ?? 1}',
+  //               style: Theme.of(context).header1,
+  //             ),
+  //         ],
+  //         if (config.showOrganizationPhone) ...[
+  //           if (data.branchInfo.phone != null)
+  //             Text(
+  //               "Phone: ${data.branchInfo.phone}",
+  //               style: Theme.of(context).header1,
+  //             ),
+  //           if (data.branchInfo.mobileNos != null)
+  //             Text(
+  //               "Mobile: ${data.branchInfo.mobileNos?.join(",").toString()}",
+  //               style: Theme.of(context).header1,
+  //             ),
+  //           if (data.branchInfo.email != null)
+  //             Text(
+  //               "Email: ${data.branchInfo.email}",
+  //               style: Theme.of(context).header1,
+  //             ),
+  //         ],
+  //         if (config.showOrganizationDetails) ...[
+  //           Text(
+  //             "GSTIN: ${data.branchInfo.gstNo}",
+  //             style: Theme.of(context).header1,
+  //           ),
+  //           if (data.branchInfo.licNo != null)
+  //             Text(
+  //               "LIC.NO: ${data.branchInfo.licNo}",
+  //               style: Theme.of(context).header1,
+  //             ),
+  //         ]
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget buildDivider({double? height}) {
     return Divider(
@@ -104,8 +105,6 @@ FutureOr<Uint8List> buildSaleLayoutB(
     mm(config.pageHeight),
     marginAll: mm(config.margin),
   );
-
-  final pf = config.pageWidth == 210 && config.pageHeight == 297 ? true : false;
 
   final List<FlexColumnWidth> colWidths = [];
   if (config.serialNo.width > 0) {
@@ -152,44 +151,41 @@ FutureOr<Uint8List> buildSaleLayoutB(
     MultiPage(
       pageTheme: PageTheme(
         pageFormat: pageFormat,
-        orientation: (config.orientation == "landscape")
-            ? PageOrientation.landscape
-            : PageOrientation.portrait,
         theme: ThemeData(
           defaultTextStyle: TextStyle(
-            fontSize: pf ? 10 : 8,
+            fontSize: 10,
             font: Font.courier(),
           ),
           header0: TextStyle(
-            fontSize: pf ? 17 : 15,
+            fontSize: 17,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
           ),
           header1: TextStyle(
-            fontSize: pf ? 11 : 9,
+            fontSize: 11,
             font: Font.courier(),
           ),
           header2: TextStyle(
-            fontSize: pf ? 11 : 9,
+            fontSize: 11,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
           ),
           header3: TextStyle(
-            fontSize: pf ? 10 : 8,
+            fontSize: 10,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
           ),
           header4: TextStyle(
-            fontSize: pf ? 13 : 11,
+            fontSize: 13,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
           ),
           header5: TextStyle(
-            fontSize: pf ? 10 : 8,
+            fontSize: 10,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
@@ -209,45 +205,17 @@ FutureOr<Uint8List> buildSaleLayoutB(
       footer: (context) => buildPageFooter(context),
       build: (context) {
         return [
-          data.qrCode != null && data.qrCode!.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(
-                      left: 2, top: 2, bottom: 2, right: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildVoucherHeader(
-                        context: context,
-                        orgName: data.orgName,
-                        branchInfo: data.branchInfo,
-                        showOrganizationAddress: config.showOrganizationAddress,
-                        showOrganizationPhone: config.showOrganizationPhone,
-                        showOrganizationMobile: config.showOrganizationMobile,
-                        showOrganizationEmail: config.showOrganizationEmail,
-                        showGstNo: config.showGstNo,
-                        showLicNo: config.showLicNo,
-                        crossAxis: CrossAxisAlignment.start,
-                      ),
-                      BarcodeWidget(
-                        data: data.qrCode!,
-                        barcode: Barcode.qrCode(),
-                        height: 60,
-                        width: 60,
-                      ),
-                    ],
-                  ),
-                )
-              : buildVoucherHeader(
-                  context: context,
-                  orgName: data.orgName,
-                  branchInfo: data.branchInfo,
-                  showOrganizationAddress: config.showOrganizationAddress,
-                  showOrganizationPhone: config.showOrganizationPhone,
-                  showOrganizationMobile: config.showOrganizationMobile,
-                  showOrganizationEmail: config.showOrganizationEmail,
-                  showGstNo: config.showGstNo,
-                  showLicNo: config.showLicNo,
-                ),
+          buildVoucherHeader(
+            context: context,
+            orgName: data.orgName,
+            branchInfo: data.branchInfo,
+            showOrganizationAddress: config.showOrganizationAddress,
+            showOrganizationPhone: config.showOrganizationPhone,
+            showOrganizationMobile: config.showOrganizationMobile,
+            showOrganizationEmail: config.showOrganizationEmail,
+            showGstNo: config.showGstNo,
+            showLicNo: config.showLicNo,
+          ),
           buildDivider(),
           Table(
             columnWidths: {
@@ -363,48 +331,6 @@ FutureOr<Uint8List> buildSaleLayoutB(
                                   Text(data.voucherInfo.time),
                                 ],
                               ),
-                              if (data.voucherInfo.refNo != null)
-                                TableRow(
-                                  children: [
-                                    Text(
-                                      "Ref.No",
-                                      style: Theme.of(context).header3,
-                                    ),
-                                    Text(
-                                      ":",
-                                      style: Theme.of(context).header3,
-                                    ),
-                                    Text(data.voucherInfo.refNo!),
-                                  ],
-                                ),
-                              if (data.deliveryInfo.date != null)
-                                TableRow(
-                                  children: [
-                                    Text(
-                                      "Delivery Date",
-                                      style: Theme.of(context).header3,
-                                    ),
-                                    Text(
-                                      ":",
-                                      style: Theme.of(context).header3,
-                                    ),
-                                    Text(data.deliveryInfo.date!),
-                                  ],
-                                ),
-                              if (data.deliveryInfo.transport != null)
-                                TableRow(
-                                  children: [
-                                    Text(
-                                      "Transport",
-                                      style: Theme.of(context).header3,
-                                    ),
-                                    Text(
-                                      ":",
-                                      style: Theme.of(context).header3,
-                                    ),
-                                    Text(data.deliveryInfo.transport!),
-                                  ],
-                                ),
                             ],
                           ),
                         )
@@ -917,195 +843,171 @@ FutureOr<Uint8List> buildSaleLayoutB(
                           ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
           ),
           buildDivider(),
-          Table(
-            columnWidths: {
-              0: const FlexColumnWidth(1.5),
-              1: const FlexColumnWidth(1),
-            },
-            border: TableBorder.symmetric(
-              inside: const BorderSide(color: PdfColors.grey800),
-            ),
-            children: [
-              TableRow(
-                children: [
-                  config.showBankDetails != null &&
-                          config.showBankDetails!.enabled
-                      ? Container(
-                          padding: const EdgeInsets.all(2),
-                          child: Table(
-                            columnWidths: {
-                              0: const FlexColumnWidth(1),
-                              1: const FlexColumnWidth(0.1),
-                              2: const FlexColumnWidth(3),
-                            },
-                            children: [
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "Bank Name",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    config.showBankDetails!.bankName,
-                                    style: Theme.of(context).header3,
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "A/C Name",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    config.showBankDetails!.acName,
-                                    style: Theme.of(context).header3,
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "A/C No",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    config.showBankDetails!.acNo,
-                                    style: Theme.of(context).header3,
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "IFSC Code",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    config.showBankDetails!.ifscCode,
-                                    style: Theme.of(context).header3,
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "PAN No",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    config.showBankDetails!.panNo,
-                                    style: Theme.of(context).header3,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      : Text(""),
-                  config.showBillDetails
-                      ? Container(
-                          padding: const EdgeInsets.all(2),
-                          child: Table(
-                            columnWidths: {
-                              0: const FlexColumnWidth(1.2),
-                              1: const FlexColumnWidth(0.1),
-                              2: const FlexColumnWidth(1.5),
-                            },
-                            children: [
-                              if (data.salesManName != null)
+          if ((config.showBankDetails != null &&
+                  config.showBankDetails!.enabled) ||
+              config.showBillDetails) ...[
+            Table(
+              columnWidths: {
+                0: const FlexColumnWidth(1.5),
+                1: const FlexColumnWidth(1),
+              },
+              border: TableBorder.symmetric(
+                inside: const BorderSide(color: PdfColors.grey800),
+              ),
+              children: [
+                TableRow(
+                  children: [
+                    config.showBankDetails != null &&
+                            config.showBankDetails!.enabled
+                        ? Container(
+                            padding: const EdgeInsets.all(2),
+                            child: Table(
+                              columnWidths: {
+                                0: const FlexColumnWidth(1),
+                                1: const FlexColumnWidth(0.1),
+                                2: const FlexColumnWidth(3),
+                              },
+                              children: [
                                 TableRow(
                                   children: [
                                     Text(
-                                      "SalesMan",
+                                      "Bank Name",
                                       style: Theme.of(context).header3,
                                     ),
                                     Text(
                                       ":",
                                       style: Theme.of(context).header3,
                                     ),
-                                    Text(data.salesManName!)
+                                    Text(
+                                      config.showBankDetails!.bankName,
+                                      style: Theme.of(context).header3,
+                                    ),
                                   ],
                                 ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "Billed By",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(data.billedBy),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "Delivered To",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(data.partyInfo.name ?? 'Customer'),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  Text(
-                                    "Description",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(
-                                    ":",
-                                    style: Theme.of(context).header3,
-                                  ),
-                                  Text(data.description ?? ''),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      : Text("")
-                ],
-              ),
-            ],
-          ),
-          buildDivider(),
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "A/C Name",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      config.showBankDetails!.acName,
+                                      style: Theme.of(context).header3,
+                                    ),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "A/C No",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      config.showBankDetails!.acNo,
+                                      style: Theme.of(context).header3,
+                                    ),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "IFSC Code",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      config.showBankDetails!.ifscCode,
+                                      style: Theme.of(context).header3,
+                                    ),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "PAN No",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      config.showBankDetails!.panNo,
+                                      style: Theme.of(context).header3,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : Text(""),
+                    config.showBillDetails
+                        ? Container(
+                            padding: const EdgeInsets.all(2),
+                            child: Table(
+                              columnWidths: {
+                                0: const FlexColumnWidth(1.2),
+                                1: const FlexColumnWidth(0.1),
+                                2: const FlexColumnWidth(1.5),
+                              },
+                              children: [
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "Ref.No",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(data.voucherInfo.refNo ?? '')
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "Description",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header3,
+                                    ),
+                                    Text(data.description ?? ''),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : Text(""),
+                  ],
+                ),
+              ],
+            ),
+            buildDivider(),
+          ],
           Table(
             columnWidths: {
-              0: const FlexColumnWidth(0.7),
-              1: const FlexColumnWidth(0.8),
-              2: const FlexColumnWidth(1),
+              0: const FlexColumnWidth(1),
+              1: const FlexColumnWidth(1),
             },
             border: TableBorder.symmetric(
               inside: const BorderSide(color: PdfColors.grey800),
@@ -1126,62 +1028,6 @@ FutureOr<Uint8List> buildSaleLayoutB(
                       style: Theme.of(context).header3,
                     ),
                   ),
-                  if (config.showBalanceDetails)
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      child: Table(
-                        columnWidths: {
-                          0: const FlexColumnWidth(1.5),
-                          1: const FlexColumnWidth(1)
-                        },
-                        children: [
-                          TableRow(
-                            children: [
-                              Text(
-                                "Balance O/S",
-                                style: Theme.of(context).header5,
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text(
-                                "Previous Balance",
-                                style: Theme.of(context).header3,
-                              ),
-                              Text(
-                                ": ${data.partyOutstanding.previousBal >= 0.0 ? '${data.partyOutstanding.previousBal.toStringAsFixed(2)} Dr' : '${data.partyOutstanding.previousBal.abs().toStringAsFixed(2)} Cr'}",
-                                style: Theme.of(context).header3,
-                              )
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text(
-                                "Bill Amount",
-                                style: Theme.of(context).header3,
-                              ),
-                              Text(
-                                ": ${data.netAmount.toStringAsFixed(2)}",
-                                style: Theme.of(context).header3,
-                              )
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text(
-                                "Total Outstanding",
-                                style: Theme.of(context).header3,
-                              ),
-                              Text(
-                                ": ${data.partyOutstanding.totalOutstanding >= 0.0 ? '${data.partyOutstanding.totalOutstanding.toStringAsFixed(2)} Dr' : '${data.partyOutstanding.totalOutstanding.abs().toStringAsFixed(2)} Cr'}",
-                                style: Theme.of(context).header3,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                   Container(
                     padding: const EdgeInsets.all(2),
                     child: Column(
@@ -1207,15 +1053,6 @@ FutureOr<Uint8List> buildSaleLayoutB(
             ],
           ),
           buildDivider(),
-          if (data.lut) ...[
-            Padding(
-              padding: const EdgeInsets.only(left: 2, right: 2, top: 5),
-              child: Text(
-                "SUPPLY MEANT FOR EXPORT / SUPPLY TO SEZ UNIT OR SEZ DEVELOPER FOR AUTHORISED OPERATION UNDER BOND OR LETTER OF UNDERTAKING WITHOUT PAYMENT OF INTEGRATED TAX [ ARN NO. ______________________________________ ]",
-              ),
-            ),
-            buildDivider(height: 5),
-          ],
           if (config.termsAndConditions != null &&
               config.termsAndConditions!.isNotEmpty) ...[
             Container(
