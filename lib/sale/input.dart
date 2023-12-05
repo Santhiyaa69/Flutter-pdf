@@ -251,10 +251,12 @@ class SaleLayoutA6Config {
   final double pageWidth;
   final double pageHeight;
   final double margin;
-  final bool showOrganizationName;
   final bool showOrganizationAddress;
   final bool showOrganizationPhone;
-  final bool showOrganizationDetails;
+  final bool showOrganizationMobile;
+  final bool showOrganizationEmail;
+  final bool showGstNo;
+  final bool showLicNo;
   final bool showVoucherInfo;
   final bool showContactInfo; //[patient and doctor]
 
@@ -274,10 +276,12 @@ class SaleLayoutA6Config {
     required this.pageWidth,
     required this.pageHeight,
     required this.margin,
-    this.showOrganizationName = false,
     this.showOrganizationAddress = false,
     this.showOrganizationPhone = false,
-    this.showOrganizationDetails = false,
+    this.showOrganizationMobile = false,
+    this.showOrganizationEmail = false,
+    this.showGstNo = false,
+    this.showLicNo = false,
     this.showVoucherInfo = false,
     this.showContactInfo = false,
     required this.item,
@@ -644,6 +648,7 @@ final saleData = SaleData(
     gstNo: "33AIVPV0468N1ZC",
     phone: "04612383801",
     mobileNos: ["9842019102", "7373776102"],
+    email: "support@auditplus.io",
     address: AddressInfo(
       address: "2nd FLOOR,45,GIN FACTORY ROAD",
       city: "TUTICORIN",
@@ -653,7 +658,7 @@ final saleData = SaleData(
   voucherInfo: VoucherInfo(
     voucherNo: "MBBB23242758",
     date: "2023-11-21",
-    time: "2023-09-26T08:19:25.692492600Z",
+    time: "05.15P.M",
     refNo: null,
     voucherName: "Sale",
     voucherType: "voucher_type:sale",
@@ -1060,11 +1065,11 @@ final saleLayoutA6Config = SaleLayoutA6Config(
   pageWidth: 148,
   pageHeight: 105,
   margin: 5,
-  showOrganizationName: true,
   showOrganizationAddress: true,
+  showOrganizationEmail: true,
   showOrganizationPhone: true,
-  showOrganizationDetails: true,
   showContactInfo: true,
+  showVoucherInfo: true,
   item: ColumnConfig(
     width: 2,
     label: "PARTICULARS",

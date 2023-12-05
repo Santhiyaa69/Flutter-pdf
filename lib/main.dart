@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:print_pdf/purchase/input.dart';
 import 'package:print_pdf/purchase/purchase_a4.dart';
 import 'package:print_pdf/sale/sale_a4.dart';
+import 'package:print_pdf/stock_transfer/input.dart';
 import 'package:printing/printing.dart';
 
 // import 'customer_wise_sales/customer_wise_sales.dart';
@@ -23,6 +24,7 @@ import 'package:print_pdf/sale/sale_78mm.dart';
 import 'sale/sale_a6.dart';
 import 'sale_quotation/input.dart';
 import 'sale_quotation/sale_quotation_a4.dart';
+import 'stock_transfer/stock_transfer.dart';
 
 // import 'sale_register/sale_register_detail.dart';
 // import 'sale_register/sale_register_view.dart';
@@ -109,10 +111,14 @@ class Home extends StatelessWidget {
 
                 // buildSaleLayoutA(saleData, saleLayoutAConfig);
                 // buildSaleLayoutB(saleData, saleLayoutBConfig);
-                // buildSaleLayoutA6(saleData, saleLayoutA6Config);
-                // buildSaleQuotationLayout(
-                //     saleQuotationData, saleQuotationConfig);
-                buildPurchaseLayout(purchaseData, purchaseConfig);
+                buildSaleLayoutA6(saleData, saleLayoutA6Config);
+            // buildSaleQuotationLayout(
+            //     saleQuotationData, saleQuotationConfig);
+            // buildPurchaseLayout(purchaseData, purchaseConfig);
+            //     buildStockTransferLayout(
+            //   stockTransferData,
+            //   stockTransferConfig,
+            // );
           },
         ),
       ),
