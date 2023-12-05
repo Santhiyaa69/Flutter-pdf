@@ -4,8 +4,10 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../common/divider.dart';
 import '../common/page_footer.dart';
 import '../common/page_header.dart';
+import '../common/utils.dart';
 import '../common/voucher_header.dart';
 import '../main.dart';
 import 'input.dart';
@@ -14,90 +16,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
   SaleQuotationData data,
   SaleQuotationConfig config,
 ) {
-  partyInfoAddr1(SaleQuotationData data) {
-    if (data.partyInfo.address?.city != null &&
-        data.partyInfo.address?.pincode != null) {
-      return '${data.partyInfo.address!.city!}-${data.partyInfo.address!.pincode!}';
-    } else if (data.partyInfo.address?.city != null) {
-      return data.partyInfo.address!.city!;
-    } else if (data.partyInfo.address?.pincode != null) {
-      return data.partyInfo.address!.pincode!;
-    }
-  }
-
-  partyInfoAddr2(SaleQuotationData data) {
-    if (data.partyInfo.address?.state != null &&
-        data.partyInfo.address?.country != null) {
-      return '${data.partyInfo.address!.state!},${data.partyInfo.address!.country!}';
-    } else if (data.partyInfo.address?.state != null) {
-      return data.partyInfo.address!.state!;
-    } else if (data.partyInfo.address?.country != null) {
-      return data.partyInfo.address!.country!;
-    }
-  }
-
-  // Widget buildSaleQuotationVoucherHeader(
-  //   Context context,
-  //   SaleQuotationConfig config,
-  //   SaleQuotationData data,
-  // ) {
-  //   return Center(
-  //     child: Column(
-  //       children: [
-  //         if (config.showOrganizationName)
-  //           Text(data.orgName, style: Theme.of(context).header0),
-  //         if (config.showOrganizationAddress) ...[
-  //           if (data.branchInfo.address.address != null)
-  //             Text(
-  //               data.branchInfo.address.address!,
-  //               style: Theme.of(context).header1,
-  //             ),
-  //           if (data.branchInfo.address.city != null)
-  //             Text(
-  //               '${data.branchInfo.address.city!} - ${data.branchInfo.address.pincode ?? 1}',
-  //               style: Theme.of(context).header1,
-  //             ),
-  //         ],
-  //         if (config.showOrganizationPhone) ...[
-  //           if (data.branchInfo.phone != null)
-  //             Text(
-  //               "Phone: ${data.branchInfo.phone}",
-  //               style: Theme.of(context).header1,
-  //             ),
-  //           if (data.branchInfo.mobileNos != null)
-  //             Text(
-  //               "Mobile: ${data.branchInfo.mobileNos?.join(",").toString()}",
-  //               style: Theme.of(context).header1,
-  //             ),
-  //           if (data.branchInfo.email != null)
-  //             Text(
-  //               "Email: ${data.branchInfo.email}",
-  //               style: Theme.of(context).header1,
-  //             ),
-  //         ],
-  //         if (config.showOrganizationDetails) ...[
-  //           Text(
-  //             "GSTIN: ${data.branchInfo.gstNo}",
-  //             style: Theme.of(context).header1,
-  //           ),
-  //           if (data.branchInfo.licNo != null)
-  //             Text(
-  //               "LIC.NO: ${data.branchInfo.licNo}",
-  //               style: Theme.of(context).header1,
-  //             ),
-  //         ]
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  Widget buildDivider({double? height}) {
-    return Divider(
-      height: height ?? 0,
-      color: PdfColors.grey800,
-    );
-  }
-
   final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
 
   final pageFormat = PdfPageFormat(
@@ -243,7 +161,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                               if (data.partyInfo.address?.address != null)
                                 Text(data.partyInfo.address!.address!),
                               Text(
-                                '${partyInfoAddr1(data)},${partyInfoAddr2(data)}',
+                                '${partyInfoAddr1(data.partyInfo)},${partyInfoAddr2(data.partyInfo)}',
                               ),
                               Row(
                                 mainAxisAlignment:

@@ -1,9 +1,9 @@
 import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/widgets.dart';
 
-pw.Widget buildDivider() {
-  return pw.Divider(
+Widget buildDivider({double? height}) {
+  return Divider(
+    height: height ?? 0,
     color: PdfColors.grey800,
-    height: 8,
   );
 }

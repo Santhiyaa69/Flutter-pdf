@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../common/divider.dart';
 import '../common/page_footer.dart';
 import '../main.dart';
 import 'input.dart';
@@ -12,13 +13,6 @@ FutureOr<Uint8List> buildSaleLayoutA6(
   SaleData data,
   SaleLayoutA6Config config,
 ) {
-  Widget buildDivider({double? height}) {
-    return Divider(
-      height: height ?? 0,
-      color: PdfColors.grey800,
-    );
-  }
-
   final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
   final pageFormat = PdfPageFormat(
     mm(config.pageWidth),

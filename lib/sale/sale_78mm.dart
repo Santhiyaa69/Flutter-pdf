@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../common/divider.dart';
 import '../common/voucher_header.dart';
 import '../main.dart';
 import 'input.dart';
@@ -12,13 +13,6 @@ FutureOr<Uint8List> buildSaleLayoutA(
   SaleData data,
   SaleLayoutAConfig config,
 ) {
-  Widget buildDivider({double? height}) {
-    return Divider(
-      height: height ?? 5,
-      color: PdfColors.grey800,
-    );
-  }
-
   // Widget buildHeader(Context context) {
   //   return Column(
   //     crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,8 +135,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
               showGstNo: config.showGstNo,
               showLicNo: config.showLicNo,
             ),
-            // buildHeader(context),
-            buildDivider(),
+            buildDivider(height: 5),
             Table(
               columnWidths: {
                 0: const FlexColumnWidth(1.5),
@@ -166,7 +159,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
                 ),
               ],
             ),
-            buildDivider(),
+            buildDivider(height: 5),
             if (config.item.width > 0)
               Container(
                 alignment: Alignment.centerLeft,
@@ -190,7 +183,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
                 ),
               ],
             ),
-            buildDivider(),
+            buildDivider(height: 5),
             for (final record in data.items) ...[
               Container(
                 alignment: Alignment.centerLeft,
@@ -230,7 +223,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
                 ],
               ),
             ],
-            buildDivider(),
+            buildDivider(height: 5),
             Table(
               columnWidths: {
                 0: const FlexColumnWidth(2.8),
@@ -263,7 +256,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
                 ),
               ],
             ),
-            buildDivider(),
+            buildDivider(height: 5),
             Table(
               columnWidths: {
                 0: const FlexColumnWidth(2.2),
@@ -321,7 +314,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
                   ),
               ],
             ),
-            buildDivider(),
+            buildDivider(height: 5),
             Table(
               columnWidths: {
                 0: const FlexColumnWidth(2.5),
@@ -398,7 +391,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
             Text(
               "TOTAL GST : ${data.taxSummary.fold(0.0, (preValue, x) => preValue + x.cgst + x.sgst + x.igst + x.cess).toStringAsFixed(2)}",
             ),
-            buildDivider(),
+            buildDivider(height: 5),
             if (config.termsAndConditions != null)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

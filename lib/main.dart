@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:print_pdf/purchase/input.dart';
+import 'package:print_pdf/purchase/purchase_a4.dart';
 import 'package:print_pdf/sale/sale_a4.dart';
 import 'package:printing/printing.dart';
 
@@ -108,8 +110,9 @@ class Home extends StatelessWidget {
                 // buildSaleLayoutA(saleData, saleLayoutAConfig);
                 // buildSaleLayoutB(saleData, saleLayoutBConfig);
                 // buildSaleLayoutA6(saleData, saleLayoutA6Config);
-                buildSaleQuotationLayout(
-                    saleQuotationData, saleQuotationConfig);
+                // buildSaleQuotationLayout(
+                //     saleQuotationData, saleQuotationConfig);
+                buildPurchaseLayout(purchaseData, purchaseConfig);
           },
         ),
       ),
