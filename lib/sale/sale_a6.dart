@@ -312,57 +312,6 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                       : Text('')
                 ],
               ),
-              // TableRow(
-              //   children: [
-              //     Padding(
-              //       padding: const EdgeInsets.all(2),
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           if (config.showOrganizationPhone ||
-              //               config.showOrganizationMobile)
-              //             Row(
-              //               children: [
-              //                 if (data.branchInfo.phone != null ||
-              //                     data.branchInfo.mobileNos != null)
-              //                   Text(
-              //                     "Phone  :",
-              //                     style: Theme.of(context).header1,
-              //                   ),
-              //                 if (data.branchInfo.phone != null &&
-              //                     (data.branchInfo.mobileNos != null &&
-              //                         data.branchInfo.mobileNos!
-              //                             .isNotEmpty)) ...[
-              //                   Text(
-              //                     "${data.branchInfo.phone},${data.branchInfo.mobileNos?.first}",
-              //                   ),
-              //                 ] else if (data.branchInfo.phone != null)
-              //                   Text("${data.branchInfo.phone}")
-              //                 else if (data.branchInfo.mobileNos != null &&
-              //                     data.branchInfo.mobileNos!.isNotEmpty)
-              //                   Text(
-              //                     "${data.branchInfo.mobileNos?.first}",
-              //                   )
-              //               ],
-              //             ),
-              //           if (config.showOrganizationEmail)
-              //             if (data.branchInfo.email != null)
-              //               Row(
-              //                 children: [
-              //                   Text(
-              //                     "Email  :",
-              //                     style: Theme.of(context).header1,
-              //                   ),
-              //                   Text(
-              //                     "${data.branchInfo.email}",
-              //                   ),
-              //                 ],
-              //               ),
-              //         ],
-              //       ),
-              //     ),
-              //   ],
-              // ),
             ],
           ),
           buildDivider(),

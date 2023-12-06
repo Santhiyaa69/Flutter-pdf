@@ -16,60 +16,6 @@ FutureOr<Uint8List> buildSaleLayoutB(
   SaleData data,
   SaleLayoutBConfig config,
 ) {
-  // Widget buildSaleVoucherHeader(
-  //   Context context,
-  //   SaleLayoutBConfig config,
-  //   SaleData data,
-  // ) {
-  //   return Center(
-  //     child: Column(
-  //         crossAxisAlignment: data.qrCode != null && data.qrCode!.isNotEmpty
-  //             ? CrossAxisAlignment.start
-  //             : CrossAxisAlignment.center,
-  //         children: [
-  //           Text(data.orgName, style: Theme.of(context).header0),
-  //           if (config.showOrganizationAddress) ...[
-  //             if (data.branchInfo.address.address != null)
-  //               Text(
-  //                 data.branchInfo.address.address!,
-  //                 style: Theme.of(context).header1,
-  //               ),
-  //             if (data.branchInfo.address.city != null)
-  //               Text(
-  //                 '${data.branchInfo.address.city!} - ${data.branchInfo.address.pincode ?? 1}',
-  //                 style: Theme.of(context).header1,
-  //               ),
-  //           ],
-  //           if (config.showOrganizationPhone) ...[
-  //             if (data.branchInfo.phone != null)
-  //               Text(
-  //                 "Phone: ${data.branchInfo.phone}",
-  //                 style: Theme.of(context).header1,
-  //               ),
-  //             if (data.branchInfo.mobileNos != null)
-  //               Text(
-  //                 "Mobile: ${data.branchInfo.mobileNos?.join(",").toString()}",
-  //                 style: Theme.of(context).header1,
-  //               ),
-  //             if (data.branchInfo.email != null)
-  //               Text(
-  //                 "Email: ${data.branchInfo.email}",
-  //                 style: Theme.of(context).header1,
-  //               ),
-  //           ],
-  //           Text(
-  //             "GSTIN: ${data.branchInfo.gstNo}",
-  //             style: Theme.of(context).header1,
-  //           ),
-  //           if (data.branchInfo.licNo != null)
-  //             Text(
-  //               "LIC.NO: ${data.branchInfo.licNo}",
-  //               style: Theme.of(context).header1,
-  //             ),
-  //         ]),
-  //   );
-  // }
-
   final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
 
   final pageFormat = PdfPageFormat(
@@ -185,7 +131,11 @@ FutureOr<Uint8List> buildSaleLayoutB(
           data.qrCode != null && data.qrCode!.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.only(
-                      left: 2, top: 2, bottom: 2, right: 10),
+                    left: 2,
+                    top: 2,
+                    bottom: 2,
+                    right: 10,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1125,7 +1075,7 @@ FutureOr<Uint8List> buildSaleLayoutB(
                               Text(
                                 ": ${data.partyOutstanding.previousBal >= 0.0 ? '${data.partyOutstanding.previousBal.toStringAsFixed(2)} Dr' : '${data.partyOutstanding.previousBal.abs().toStringAsFixed(2)} Cr'}",
                                 style: Theme.of(context).header3,
-                              )
+                              ),
                             ],
                           ),
                           TableRow(
@@ -1137,7 +1087,7 @@ FutureOr<Uint8List> buildSaleLayoutB(
                               Text(
                                 ": ${data.netAmount.toStringAsFixed(2)}",
                                 style: Theme.of(context).header3,
-                              )
+                              ),
                             ],
                           ),
                           TableRow(
@@ -1149,7 +1099,7 @@ FutureOr<Uint8List> buildSaleLayoutB(
                               Text(
                                 ": ${data.partyOutstanding.totalOutstanding >= 0.0 ? '${data.partyOutstanding.totalOutstanding.toStringAsFixed(2)} Dr' : '${data.partyOutstanding.totalOutstanding.abs().toStringAsFixed(2)} Cr'}",
                                 style: Theme.of(context).header3,
-                              )
+                              ),
                             ],
                           ),
                         ],

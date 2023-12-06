@@ -13,57 +13,6 @@ FutureOr<Uint8List> buildSaleLayoutA(
   SaleData data,
   SaleLayoutAConfig config,
 ) {
-  // Widget buildHeader(Context context) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.center,
-  //     children: [
-  //       Text(
-  //         data.orgName,
-  //         style: Theme.of(context).header1,
-  //       ),
-  //       if (config.showOrganizationAddress) ...[
-  //         if (data.branchInfo.address.address != null)
-  //           Text(
-  //             data.branchInfo.address.address!,
-  //           ),
-  //         if (data.branchInfo.address.city != null)
-  //           Text(
-  //             '${data.branchInfo.address.city!}-${data.branchInfo.address.pincode ?? 1}',
-  //           ),
-  //       ],
-  //       if (config.showOrganizationPhone)
-  //         if (data.branchInfo.phone != null)
-  //           Text(
-  //             "Phone: ${data.branchInfo.phone}",
-  //           ),
-  //       if (config.showOrganizationMobile)
-  //         if (data.branchInfo.mobileNo != null &&
-  //             data.branchInfo.mobileNo!.isNotEmpty)
-  //           Text(
-  //             "Mobile: ${data.branchInfo.mobileNo?.join(",").toString()}",
-  //           ),
-  //       if (config.showOrganizationEmail)
-  //         if (data.branchInfo.email != null)
-  //           Text(
-  //             "Email: ${data.branchInfo.email}",
-  //           ),
-  //       if (config.showGstNo)
-  //         Text(
-  //           "GSTIN: ${data.branchInfo.gstNo}",
-  //         ),
-  //       if (config.showLicNo)
-  //         if (data.branchInfo.licNo != null)
-  //           Text(
-  //             "LIC.NO: ${data.branchInfo.licNo}",
-  //           ),
-  //       Text(
-  //         data.voucherInfo.voucherName,
-  //         style: Theme.of(context).header1,
-  //       ),
-  //     ],
-  //   );
-  // }
-
   final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
 
   final pageFormat = PdfPageFormat(
@@ -134,6 +83,7 @@ FutureOr<Uint8List> buildSaleLayoutA(
               showOrganizationEmail: config.showOrganizationEmail,
               showGstNo: config.showGstNo,
               showLicNo: config.showLicNo,
+              title: config.title,
             ),
             buildDivider(height: 5),
             Table(

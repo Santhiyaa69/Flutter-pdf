@@ -12,6 +12,7 @@ Widget buildVoucherHeader({
   bool showOrganizationEmail = true,
   bool showGstNo = true,
   bool showLicNo = true,
+  String? title,
   CrossAxisAlignment? crossAxis,
 }) {
   return Center(
@@ -60,6 +61,11 @@ Widget buildVoucherHeader({
               "LIC.NO: ${branchInfo.licNo}",
               style: Theme.of(context).header1,
             ),
+        if (title != null)
+          Text(
+            title,
+            style: Theme.of(context).header1,
+          ),
       ],
     ),
   );

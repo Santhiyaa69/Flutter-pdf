@@ -67,12 +67,6 @@ FutureOr<Uint8List> buildStockTransferLayout(
             decoration: TextDecoration.underline,
             decorationColor: PdfColors.grey800,
           ),
-          header3: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-            font: Font.courier(),
-            fontBold: Font.courierBold(),
-          ),
         ),
         buildBackground: (context) {
           return Container(
@@ -127,74 +121,38 @@ FutureOr<Uint8List> buildStockTransferLayout(
                                     2: const FlexColumnWidth(1),
                                   },
                                   children: [
-                                    if (config.showOrganizationPhone)
-                                      if (data.branchInfo.phone != null)
-                                        TableRow(
-                                          children: [
-                                            Text(
-                                              "Phone",
-                                              style: Theme.of(context).header1,
-                                            ),
-                                            Text(
-                                              ":",
-                                              style: Theme.of(context).header1,
-                                            ),
-                                            if (data.branchInfo.phone != null)
-                                              Text(
-                                                "${data.branchInfo.phone}",
-                                              ),
-                                          ],
+                                    TableRow(
+                                      children: [
+                                        if (config.showOrganizationPhone ||
+                                            config.showOrganizationMobile)
+                                          Text(
+                                            "Phone",
+                                            style: Theme.of(context).header1,
+                                          ),
+                                        Text(
+                                          ":",
+                                          style: Theme.of(context).header1,
                                         ),
-                                    if (config.showOrganizationMobile)
-                                      if (data.branchInfo.mobileNos != null &&
-                                          data.branchInfo.mobileNos!.isNotEmpty)
-                                        TableRow(
-                                          children: [
-                                            Text(
-                                              "Mobile",
-                                              style: Theme.of(context).header1,
-                                            ),
-                                            Text(
-                                              ":",
-                                              style: Theme.of(context).header1,
-                                            ),
-                                            Text(
-                                              "${data.branchInfo.mobileNos?.first}",
-                                            ),
-                                          ],
-                                        ),
-                                    // TableRow(
-                                    //   children: [
-                                    //     if (config.showOrganizationPhone ||
-                                    //         config.showOrganizationMobile)
-                                    //       Text(
-                                    //         "Phone",
-                                    //         style: Theme.of(context).header1,
-                                    //       ),
-                                    //     Text(
-                                    //       ":",
-                                    //       style: Theme.of(context).header1,
-                                    //     ),
-                                    //     if (data.branchInfo.phone != null &&
-                                    //         (data.branchInfo.mobileNos !=
-                                    //                 null &&
-                                    //             data.branchInfo.mobileNos!
-                                    //                 .isNotEmpty)) ...[
-                                    //       Text(
-                                    //         "${data.branchInfo.phone},${data.branchInfo.mobileNos?.first}",
-                                    //       ),
-                                    //     ] else if (data.branchInfo.phone !=
-                                    //         null)
-                                    //       Text("${data.branchInfo.phone}")
-                                    //     else if (data.branchInfo.mobileNos !=
-                                    //             null &&
-                                    //         data.branchInfo.mobileNos!
-                                    //             .isNotEmpty)
-                                    //       Text(
-                                    //         "${data.branchInfo.mobileNos?.first}",
-                                    //       )
-                                    //   ],
-                                    // ),
+                                        if (data.branchInfo.phone != null &&
+                                            (data.branchInfo.mobileNos !=
+                                                    null &&
+                                                data.branchInfo.mobileNos!
+                                                    .isNotEmpty)) ...[
+                                          Text(
+                                            "${data.branchInfo.phone},${data.branchInfo.mobileNos?.first}",
+                                          ),
+                                        ] else if (data.branchInfo.phone !=
+                                            null)
+                                          Text("${data.branchInfo.phone}")
+                                        else if (data.branchInfo.mobileNos !=
+                                                null &&
+                                            data.branchInfo.mobileNos!
+                                                .isNotEmpty)
+                                          Text(
+                                            "${data.branchInfo.mobileNos?.first}",
+                                          )
+                                      ],
+                                    ),
                                     if (config.showOrganizationEmail)
                                       if (data.branchInfo.email != null)
                                         TableRow(
@@ -237,27 +195,29 @@ FutureOr<Uint8List> buildStockTransferLayout(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "GSTIN:",
-                                      style: Theme.of(context).header1,
-                                    ),
-                                    Text(data.branchInfo.gstNo),
-                                  ],
-                                ),
-                                if (data.branchInfo.licNo != null)
+                                if (config.showGstNo)
                                   Row(
                                     children: [
                                       Text(
-                                        "LIC NO:",
+                                        "GSTIN:",
                                         style: Theme.of(context).header1,
                                       ),
-                                      Text(
-                                        data.branchInfo.licNo!,
-                                      ),
+                                      Text(data.branchInfo.gstNo),
                                     ],
                                   ),
+                                if (config.showLicNo)
+                                  if (data.branchInfo.licNo != null)
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "LIC NO:",
+                                          style: Theme.of(context).header1,
+                                        ),
+                                        Text(
+                                          data.branchInfo.licNo!,
+                                        ),
+                                      ],
+                                    ),
                               ],
                             ),
                           ),
