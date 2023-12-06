@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:print_pdf/payment/payment.dart';
 import 'package:print_pdf/purchase/input.dart';
 import 'package:print_pdf/purchase/purchase_a4.dart';
 import 'package:print_pdf/sale/sale_a4.dart';
@@ -19,6 +20,7 @@ import 'package:printing/printing.dart';
 // import 'stock_analysis/stock_analysis_input.dart';
 
 import 'common/branch_info.dart';
+import 'payment/input.dart';
 import 'sale/input.dart';
 import 'package:print_pdf/sale/sale_78mm.dart';
 import 'sale/sale_a6.dart';
@@ -111,14 +113,16 @@ class Home extends StatelessWidget {
 
                 // buildSaleLayoutA(saleData, saleLayoutAConfig);
                 // buildSaleLayoutB(saleData, saleLayoutBConfig);
-                buildSaleLayoutA6(saleData, saleLayoutA6Config);
-            // buildSaleQuotationLayout(
-            //     saleQuotationData, saleQuotationConfig);
-            // buildPurchaseLayout(purchaseData, purchaseConfig);
-            //     buildStockTransferLayout(
-            //   stockTransferData,
-            //   stockTransferConfig,
-            // );
+                // buildSaleLayoutA6(saleData, saleLayoutA6Config);
+                // buildSaleQuotationLayout(
+                //     saleQuotationData, saleQuotationConfig);
+                // buildPurchaseLayout(purchaseData, purchaseConfig);
+                //     buildStockTransferLayout(
+                //   stockTransferData,
+                //   stockTransferConfig,
+                // );
+
+                buildPayment(paymentData);
           },
         ),
       ),

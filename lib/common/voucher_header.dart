@@ -6,12 +6,12 @@ Widget buildVoucherHeader({
   required Context context,
   required String orgName,
   required BranchInfo branchInfo,
-  bool showOrganizationAddress = false,
-  bool showOrganizationPhone = false,
-  bool showOrganizationMobile = false,
-  bool showOrganizationEmail = false,
-  bool showGstNo = false,
-  bool showLicNo = false,
+  bool showOrganizationAddress = true,
+  bool showOrganizationPhone = true,
+  bool showOrganizationMobile = true,
+  bool showOrganizationEmail = true,
+  bool showGstNo = true,
+  bool showLicNo = true,
   CrossAxisAlignment? crossAxis,
 }) {
   return Center(

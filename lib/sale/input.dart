@@ -646,6 +646,7 @@ final saleData = SaleData(
   branchInfo: BranchInfo(
     displayName: "DP ROAD",
     gstNo: "33AIVPV0468N1ZC",
+    licNo: "06122023",
     phone: "04612383801",
     mobileNos: ["9842019102", "7373776102"],
     email: "support@auditplus.io",
@@ -1070,6 +1071,7 @@ final saleLayoutA6Config = SaleLayoutA6Config(
   showOrganizationPhone: true,
   showContactInfo: true,
   showVoucherInfo: true,
+  showLicNo: true,
   item: ColumnConfig(
     width: 2,
     label: "PARTICULARS",

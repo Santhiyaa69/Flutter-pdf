@@ -197,27 +197,29 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "GSTIN:",
-                                      style: Theme.of(context).header1,
-                                    ),
-                                    Text(data.branchInfo.gstNo),
-                                  ],
-                                ),
-                                if (data.branchInfo.licNo != null)
+                                if (config.showGstNo)
                                   Row(
                                     children: [
                                       Text(
-                                        "LIC NO:",
+                                        "GSTIN:",
                                         style: Theme.of(context).header1,
                                       ),
-                                      Text(
-                                        data.branchInfo.licNo!,
-                                      ),
+                                      Text(data.branchInfo.gstNo),
                                     ],
                                   ),
+                                if (config.showLicNo)
+                                  if (data.branchInfo.licNo != null)
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "LIC NO:",
+                                          style: Theme.of(context).header1,
+                                        ),
+                                        Text(
+                                          data.branchInfo.licNo!,
+                                        ),
+                                      ],
+                                    ),
                               ],
                             ),
                           ),
