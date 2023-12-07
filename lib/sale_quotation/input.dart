@@ -260,7 +260,7 @@ final saleQuotationData = SaleQuotationData(
 final saleQuotationConfig = SaleQuotationConfig(
   pageWidth: 210,
   pageHeight: 297,
-  margin: 5,
+  margin: 10,
   showOrganizationAddress: true,
   showOrganizationPhone: true,
   showPartyInfo: true,

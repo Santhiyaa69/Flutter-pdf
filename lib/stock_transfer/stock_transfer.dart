@@ -46,18 +46,21 @@ FutureOr<Uint8List> buildStockTransferLayout(
           defaultTextStyle: TextStyle(
             fontSize: 9,
             font: Font.courier(),
+            letterSpacing: -0.5,
           ),
           header0: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
+            letterSpacing: -0.5,
           ),
           header1: TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
+            letterSpacing: -0.5,
           ),
           header2: TextStyle(
             fontSize: 10,
@@ -66,6 +69,7 @@ FutureOr<Uint8List> buildStockTransferLayout(
             fontWeight: FontWeight.bold,
             decoration: TextDecoration.underline,
             decorationColor: PdfColors.grey800,
+            letterSpacing: -0.5,
           ),
         ),
         buildBackground: (context) {

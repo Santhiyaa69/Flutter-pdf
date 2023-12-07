@@ -616,3 +616,80 @@ FutureOr<Uint8List> buildReceipt(AccountVoucherData data) {
 
   return pdf.save();
 }
+
+FutureOr<Uint8List> buildContra(AccountVoucherData data) {
+  final pdf = Document(version: PdfVersion.pdf_1_5, compress: true);
+
+  pdf.addPage(
+    MultiPage(
+      pageTheme: PageTheme(
+        pageFormat: PdfPageFormat(mm(210), mm(297), marginAll: mm(10)),
+        theme: ThemeData(
+          defaultTextStyle: TextStyle(
+            fontSize: 11,
+            font: Font.courier(),
+          ),
+          header0: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+            font: Font.courier(),
+            fontBold: Font.courierBold(),
+          ),
+          header1: TextStyle(
+            fontSize: 11,
+            font: Font.courier(),
+          ),
+          // header2: TextStyle(
+          //   fontSize: 11,
+          //   font: Font.courier(),
+          //   fontWeight: FontWeight.bold,
+          //   fontBold: Font.courierBold(),
+          // ),
+          // header3: TextStyle(
+          //   fontSize: 11,
+          //   font: Font.courier(),
+          //   color: PdfColors.grey800,
+          // ),
+          header4: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            font: Font.courier(),
+            fontBold: Font.courierBold(),
+            decoration: TextDecoration.underline,
+            decorationColor: PdfColors.grey800,
+          ),
+        ),
+      ),
+      build: ((context) {
+        return [
+          buildVoucherHeader(
+            context: context,
+            orgName: data.orgName,
+            branchInfo: data.branchInfo,
+          ),
+          buildDivider(height: 5),
+          Container(
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            alignment: Alignment.center,
+            child: Text(
+              data.voucherInfo.voucherName,
+              style: Theme.of(context).header4,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Voucher No  : ${data.voucherInfo.voucherNo}'),
+                Text('Date  : ${data.voucherInfo.date}')
+              ],
+            ),
+          ),
+        ];
+      }),
+    ),
+  );
+
+  return pdf.save();
+}

@@ -4,6 +4,6 @@ import 'package:pdf/widgets.dart';
 Widget buildDivider({double? height}) {
   return Divider(
     height: height ?? 0,
-    color: PdfColors.grey800,
+    color: PdfColors.grey,
   );
 }

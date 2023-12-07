@@ -73,48 +73,48 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
           defaultTextStyle: TextStyle(
             fontSize: 10,
             font: Font.courier(),
+            letterSpacing: -0.5,
           ),
           header0: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
             font: Font.courier(),
             fontBold: Font.courierBold(),
+            letterSpacing: -0.5,
           ),
           header1: TextStyle(
             fontSize: 11,
             font: Font.courier(),
+            letterSpacing: -0.5,
           ),
           header2: TextStyle(
-            fontSize: 11,
-            font: Font.courier(),
-            fontBold: Font.courierBold(),
-            fontWeight: FontWeight.bold,
-          ),
-          header3: TextStyle(
             fontSize: 10,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
+            letterSpacing: -0.5,
           ),
-          header4: TextStyle(
+          header3: TextStyle(
             fontSize: 13,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
+            letterSpacing: -0.5,
           ),
-          header5: TextStyle(
+          header4: TextStyle(
             fontSize: 10,
             font: Font.courier(),
             fontBold: Font.courierBold(),
             fontWeight: FontWeight.bold,
             decoration: TextDecoration.underline,
-            decorationColor: PdfColors.grey800,
+            decorationColor: PdfColors.grey,
+            letterSpacing: -0.5,
           ),
         ),
         buildBackground: (context) {
           return Container(
             decoration: BoxDecoration(
-              border: Border.all(color: PdfColors.grey800),
+              border: Border.all(color: PdfColors.grey),
             ),
           );
         },
@@ -141,7 +141,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
               1: const FlexColumnWidth(1),
             },
             border: TableBorder.symmetric(
-              inside: const BorderSide(color: PdfColors.grey800),
+              inside: const BorderSide(color: PdfColors.grey),
             ),
             children: [
               TableRow(
@@ -154,7 +154,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                             children: [
                               Text(
                                 "To",
-                                style: Theme.of(context).header3,
+                                style: Theme.of(context).header2,
                               ),
                               if (data.partyInfo.name != null)
                                 Text(data.partyInfo.name!),
@@ -173,7 +173,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     children: [
                                       Text(
                                         "Mobile:",
-                                        style: Theme.of(context).header3,
+                                        style: Theme.of(context).header2,
                                       ),
                                       Text(
                                         (data.partyInfo.mobileNos != null)
@@ -189,7 +189,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     children: [
                                       Text(
                                         "GSTIN:",
-                                        style: Theme.of(context).header3,
+                                        style: Theme.of(context).header2,
                                       ),
                                       Text(data.branchInfo.gstNo),
                                     ],
@@ -214,11 +214,11 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                 children: [
                                   Text(
                                     "Invoice No",
-                                    style: Theme.of(context).header3,
+                                    style: Theme.of(context).header2,
                                   ),
                                   Text(
                                     ":",
-                                    style: Theme.of(context).header3,
+                                    style: Theme.of(context).header2,
                                   ),
                                   Text(data.voucherInfo.voucherNo),
                                 ],
@@ -227,11 +227,11 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                 children: [
                                   Text(
                                     "Invoice Date",
-                                    style: Theme.of(context).header3,
+                                    style: Theme.of(context).header2,
                                   ),
                                   Text(
                                     ":",
-                                    style: Theme.of(context).header3,
+                                    style: Theme.of(context).header2,
                                   ),
                                   Text(data.voucherInfo.date),
                                 ],
@@ -240,11 +240,11 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                 children: [
                                   Text(
                                     "Invoice Time",
-                                    style: Theme.of(context).header3,
+                                    style: Theme.of(context).header2,
                                   ),
                                   Text(
                                     ":",
-                                    style: Theme.of(context).header3,
+                                    style: Theme.of(context).header2,
                                   ),
                                   Text(data.voucherInfo.time),
                                 ],
@@ -260,8 +260,8 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
           buildDivider(),
           Table(
             border: const TableBorder(
-              bottom: BorderSide(color: PdfColors.grey800),
-              verticalInside: BorderSide(color: PdfColors.grey800),
+              bottom: BorderSide(color: PdfColors.grey),
+              verticalInside: BorderSide(color: PdfColors.grey),
             ),
             columnWidths: colWidths.asMap(),
             children: [
@@ -370,8 +370,8 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
           ),
           Table(
             border: const TableBorder(
-              bottom: BorderSide(color: PdfColors.grey800),
-              verticalInside: BorderSide(color: PdfColors.grey800),
+              bottom: BorderSide(color: PdfColors.grey),
+              verticalInside: BorderSide(color: PdfColors.grey),
             ),
             columnWidths: colWidths.asMap(),
             children: [
@@ -382,7 +382,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           (idx + 1).toString(),
                         ),
                       ),
@@ -390,7 +389,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.name,
                         ),
                       ),
@@ -398,7 +396,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.hsnCode ?? '',
                           textAlign: TextAlign.center,
                         ),
@@ -407,7 +404,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.qty.toStringAsFixed(item.precision),
                           textAlign: TextAlign.center,
                         ),
@@ -416,7 +412,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.mrp.toStringAsFixed(2),
                           textAlign: TextAlign.right,
                         ),
@@ -425,7 +420,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.rate.toStringAsFixed(2),
                           textAlign: TextAlign.right,
                         ),
@@ -434,7 +428,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.taxableValue.toStringAsFixed(2),
                           textAlign: TextAlign.right,
                         ),
@@ -443,7 +436,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.taxRatio.toStringAsFixed(2),
                           textAlign: TextAlign.center,
                         ),
@@ -452,7 +444,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           (item.cgstAmount +
                                   item.sgstAmount +
                                   item.igstAmount +
@@ -465,7 +456,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           item.disc?.mode == "P"
                               ? '${item.disc?.amount.toStringAsFixed(2)}%'
                               : '${item.disc?.amount.toStringAsFixed(2)}',
@@ -476,7 +466,6 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: Text(
-                          style: Theme.of(context).header1,
                           (item.taxableValue +
                                   item.cgstAmount +
                                   item.sgstAmount +
@@ -505,7 +494,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
               1: const FlexColumnWidth(1),
             },
             border: TableBorder.symmetric(
-              inside: const BorderSide(color: PdfColors.grey800),
+              inside: const BorderSide(color: PdfColors.grey),
             ),
             children: [
               TableRow(
@@ -514,11 +503,10 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                       ? Container(
                           child: Table(
                             border: const TableBorder(
-                              bottom: BorderSide(color: PdfColors.grey800),
-                              verticalInside:
-                                  BorderSide(color: PdfColors.grey800),
+                              bottom: BorderSide(color: PdfColors.grey),
+                              verticalInside: BorderSide(color: PdfColors.grey),
                               horizontalInside:
-                                  BorderSide(color: PdfColors.grey800),
+                                  BorderSide(color: PdfColors.grey),
                             ),
                             columnWidths: {
                               0: const FlexColumnWidth(1),
@@ -537,7 +525,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     child: Text(
                                       "GST%",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ),
                                   Padding(
@@ -545,7 +533,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     child: Text(
                                       "Value",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ),
                                   Padding(
@@ -553,7 +541,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     child: Text(
                                       "CGST",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ),
                                   Padding(
@@ -561,7 +549,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     child: Text(
                                       "SGST",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ),
                                   Padding(
@@ -569,7 +557,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     child: Text(
                                       "IGST",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ),
                                   Padding(
@@ -577,7 +565,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                     child: Text(
                                       "CESS",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ),
                                 ],
@@ -746,16 +734,16 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                             children: [
                               Text(
                                 "NET AMOUNT",
-                                style: Theme.of(context).header4,
+                                style: Theme.of(context).header3,
                               ),
                               Text(
                                 ":",
-                                style: Theme.of(context).header4,
+                                style: Theme.of(context).header3,
                               ),
                               Text(
                                 'Rs.${data.netAmount.toStringAsFixed(2)}',
                                 textAlign: TextAlign.end,
-                                style: Theme.of(context).header4,
+                                style: Theme.of(context).header3,
                               ),
                             ],
                           ),
@@ -776,7 +764,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                 1: const FlexColumnWidth(1),
               },
               border: TableBorder.symmetric(
-                inside: const BorderSide(color: PdfColors.grey800),
+                inside: const BorderSide(color: PdfColors.grey),
               ),
               children: [
                 TableRow(
@@ -796,15 +784,15 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "Bank Name",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       config.showBankDetails!.bankName,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ],
                                 ),
@@ -812,15 +800,15 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "A/C Name",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       config.showBankDetails!.acName,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ],
                                 ),
@@ -828,15 +816,15 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "A/C No",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       config.showBankDetails!.acNo,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ],
                                 ),
@@ -844,15 +832,15 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "IFSC Code",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       config.showBankDetails!.ifscCode,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ],
                                 ),
@@ -860,15 +848,15 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "PAN No",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       config.showBankDetails!.panNo,
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                   ],
                                 ),
@@ -890,11 +878,11 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "Ref.No",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(data.voucherInfo.refNo ?? '')
                                   ],
@@ -903,11 +891,11 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                                   children: [
                                     Text(
                                       "Description",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(
                                       ":",
-                                      style: Theme.of(context).header3,
+                                      style: Theme.of(context).header2,
                                     ),
                                     Text(data.description ?? ''),
                                   ],
@@ -928,7 +916,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
               1: const FlexColumnWidth(1),
             },
             border: TableBorder.symmetric(
-              inside: const BorderSide(color: PdfColors.grey800),
+              inside: const BorderSide(color: PdfColors.grey),
             ),
             children: [
               TableRow(
@@ -943,7 +931,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                     child: Text(
                       "Receiver Signature",
                       textAlign: TextAlign.right,
-                      style: Theme.of(context).header3,
+                      style: Theme.of(context).header2,
                     ),
                   ),
                   Container(
@@ -955,13 +943,13 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                           height: 37,
                           child: Text(
                             "For ${data.orgName}",
-                            style: Theme.of(context).header3,
+                            style: Theme.of(context).header2,
                             textAlign: TextAlign.end,
                           ),
                         ),
                         Text(
                           "Authorized Signature",
-                          style: Theme.of(context).header3,
+                          style: Theme.of(context).header2,
                         ),
                       ],
                     ),
@@ -980,7 +968,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
                 children: [
                   Text(
                     "Terms and Conditions",
-                    style: Theme.of(context).header5,
+                    style: Theme.of(context).header4,
                   ),
                   for (final tc in config.termsAndConditions!) Text("* $tc"),
                 ],
@@ -992,7 +980,7 @@ FutureOr<Uint8List> buildSaleQuotationLayout(
             alignment: Alignment.center,
             child: Text(
               config.greetings ?? '',
-              style: Theme.of(context).header3,
+              style: Theme.of(context).header2,
             ),
           ),
         ];

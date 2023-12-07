@@ -78,8 +78,8 @@ class Home extends StatelessWidget {
                 // reorderAnalysis(reorderAnalysisData);
 
                 // buildSaleLayoutA(saleData, saleLayoutAConfig);
-                // buildSaleLayoutB(saleData, saleLayoutBConfig);
-                buildSaleLayoutA6(saleData, saleLayoutA6Config);
+                buildSaleLayoutB(saleData, saleLayoutBConfig);
+            // buildSaleLayoutA6(saleData, saleLayoutA6Config);
             // buildSaleQuotationLayout(
             //     saleQuotationData, saleQuotationConfig);
             // buildPurchaseLayout(purchaseData, purchaseConfig);
@@ -90,6 +90,7 @@ class Home extends StatelessWidget {
 
             // buildPayment(paymentData);
             // buildReceipt(receiptData);
+            // buildContra(contraData);
           },
         ),
       ),

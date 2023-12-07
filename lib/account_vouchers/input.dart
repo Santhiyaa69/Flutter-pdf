@@ -170,3 +170,42 @@ final receiptData = AccountVoucherData(
   amount: 30,
   description: 'pay',
 );
+
+final contraData = AccountVoucherData(
+  title: "Contra",
+  orgName: "TEST ORG",
+  branchInfo: BranchInfo(
+    displayName: "DP ROAD",
+    gstNo: "33AIVPV0468N1ZC",
+    phone: null,
+    mobileNos: ["9842019102", "7373776102"],
+    email: "support@auditplus.io",
+    address: AddressInfo(
+      address: "2nd FLOOR,45,GIN FACTORY ROAD",
+      city: "TUTICORIN",
+      pincode: "628002",
+    ),
+  ),
+  voucherInfo: VoucherInfo(
+    voucherNo: "MBBB232427585555",
+    date: "2023-11-21",
+    time: "06.07 P.M",
+    refNo: "ST1",
+    voucherName: "CONTRA",
+    voucherType: "contra",
+  ),
+  accountTransactions: [
+    AccountTransaction(
+      account: "TMB",
+      credit: 50,
+      debit: 0,
+    ),
+    AccountTransaction(
+      account: "Cash",
+      credit: 0,
+      debit: 50,
+    ),
+  ],
+  amount: 50,
+  description: 'contra',
+);
