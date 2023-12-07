@@ -141,6 +141,7 @@ final stockTransferConfig = StockTransferConfig(
   showOrganizationPhone: true,
   showOrganizationMobile: false,
   showOrganizationEmail: true,
+  showGstNo: true,
   showVoucherInfo: true,
   showAlternateBranchInfo: true,
   item: ColumnConfig(

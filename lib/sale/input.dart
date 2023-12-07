@@ -1067,10 +1067,12 @@ final saleLayoutA6Config = SaleLayoutA6Config(
   pageHeight: 105,
   margin: 5,
   showOrganizationAddress: true,
-  showOrganizationEmail: true,
+  showOrganizationEmail: false,
   showOrganizationPhone: true,
+  showOrganizationMobile: true,
   showContactInfo: true,
   showVoucherInfo: true,
+  showGstNo: true,
   showLicNo: true,
   item: ColumnConfig(
     width: 2,

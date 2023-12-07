@@ -107,83 +107,59 @@ FutureOr<Uint8List> buildSaleLayoutA6(
             children: [
               TableRow(
                 children: [
-                  Table(
-                    columnWidths: {
-                      0: const FlexColumnWidth(1.2),
-                      1: const FlexColumnWidth(1),
-                    },
-                    children: [
-                      TableRow(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    padding: const EdgeInsets.all(2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Table(
+                          columnWidths: {
+                            0: const FlexColumnWidth(1.2),
+                            1: const FlexColumnWidth(1),
+                          },
+                          children: [
+                            TableRow(
                               children: [
-                                Text(
-                                  data.orgName,
-                                  style: Theme.of(context).header0,
-                                ),
-                                if (config.showOrganizationAddress) ...[
-                                  if (data.branchInfo.address.address != null)
-                                    Text(data.branchInfo.address.address!),
-                                  if (data.branchInfo.address.city != null)
-                                    Text(
-                                        '${data.branchInfo.address.city!} - ${data.branchInfo.address.pincode ?? 1}'),
-                                ],
-                                Table(
-                                  columnWidths: {
-                                    0: const FlexColumnWidth(0.5),
-                                    1: const FlexColumnWidth(0.1),
-                                    2: const FlexColumnWidth(1),
-                                  },
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    TableRow(
-                                      children: [
-                                        if (config.showOrganizationPhone ||
-                                            config.showOrganizationMobile)
+                                    Text(
+                                      data.orgName,
+                                      style: Theme.of(context).header0,
+                                    ),
+                                    if (config.showOrganizationAddress) ...[
+                                      if (data.branchInfo.address.address !=
+                                          null)
+                                        Text(data.branchInfo.address.address!),
+                                      if (data.branchInfo.address.city != null)
+                                        Text(
+                                            '${data.branchInfo.address.city!} - ${data.branchInfo.address.pincode ?? 1}'),
+                                    ],
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (config.showGstNo)
+                                      Row(
+                                        children: [
                                           Text(
-                                            "Phone",
+                                            "GSTIN:",
                                             style: Theme.of(context).header1,
                                           ),
-                                        Text(
-                                          ":",
-                                          style: Theme.of(context).header1,
-                                        ),
-                                        if (data.branchInfo.phone != null &&
-                                            (data.branchInfo.mobileNos !=
-                                                    null &&
-                                                data.branchInfo.mobileNos!
-                                                    .isNotEmpty)) ...[
-                                          Text(
-                                            "${data.branchInfo.phone},${data.branchInfo.mobileNos?.first}",
-                                          ),
-                                        ] else if (data.branchInfo.phone !=
-                                            null)
-                                          Text("${data.branchInfo.phone}")
-                                        else if (data.branchInfo.mobileNos !=
-                                                null &&
-                                            data.branchInfo.mobileNos!
-                                                .isNotEmpty)
-                                          Text(
-                                            "${data.branchInfo.mobileNos?.first}",
-                                          )
-                                      ],
-                                    ),
-                                    if (config.showOrganizationEmail)
-                                      if (data.branchInfo.email != null)
-                                        TableRow(
+                                          Text(data.branchInfo.gstNo),
+                                        ],
+                                      ),
+                                    if (config.showLicNo)
+                                      if (data.branchInfo.licNo != null)
+                                        Row(
                                           children: [
                                             Text(
-                                              "Email",
+                                              "LIC NO:",
                                               style: Theme.of(context).header1,
                                             ),
                                             Text(
-                                              ":",
-                                              style: Theme.of(context).header1,
-                                            ),
-                                            Text(
-                                              "${data.branchInfo.email}",
+                                              data.branchInfo.licNo!,
                                             ),
                                           ],
                                         ),
@@ -191,41 +167,66 @@ FutureOr<Uint8List> buildSaleLayoutA6(
                                 ),
                               ],
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (config.showGstNo)
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "GSTIN:",
-                                        style: Theme.of(context).header1,
-                                      ),
-                                      Text(data.branchInfo.gstNo),
-                                    ],
+                          ],
+                        ),
+                        Table(
+                          columnWidths: {
+                            0: const FlexColumnWidth(0.4),
+                            1: const FlexColumnWidth(0.1),
+                            2: const FlexColumnWidth(2),
+                          },
+                          children: [
+                            if ((config.showOrganizationPhone ||
+                                        config.showOrganizationMobile) &&
+                                    data.branchInfo.phone != null ||
+                                data.branchInfo.mobileNos != null)
+                              TableRow(
+                                children: [
+                                  Text(
+                                    "Phone",
+                                    style: Theme.of(context).header1,
                                   ),
-                                if (config.showLicNo)
-                                  if (data.branchInfo.licNo != null)
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "LIC NO:",
-                                          style: Theme.of(context).header1,
-                                        ),
-                                        Text(
-                                          data.branchInfo.licNo!,
-                                        ),
-                                      ],
+                                  Text(
+                                    ":",
+                                    style: Theme.of(context).header1,
+                                  ),
+                                  if (data.branchInfo.phone != null &&
+                                      (data.branchInfo.mobileNos != null &&
+                                          data.branchInfo.mobileNos!
+                                              .isNotEmpty)) ...[
+                                    Text(
+                                      "${data.branchInfo.phone},${data.branchInfo.mobileNos?.first}",
                                     ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                                  ] else if (data.branchInfo.phone != null)
+                                    Text("${data.branchInfo.phone}")
+                                  else if (data.branchInfo.mobileNos != null &&
+                                      data.branchInfo.mobileNos!.isNotEmpty)
+                                    Text(
+                                      "${data.branchInfo.mobileNos?.first}",
+                                    )
+                                ],
+                              ),
+                            if (config.showOrganizationEmail)
+                              if (data.branchInfo.email != null)
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      "Email",
+                                      style: Theme.of(context).header1,
+                                    ),
+                                    Text(
+                                      ":",
+                                      style: Theme.of(context).header1,
+                                    ),
+                                    Text(
+                                      "${data.branchInfo.email}",
+                                    ),
+                                  ],
+                                ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   config.showVoucherInfo
                       ? Container(
