@@ -35,7 +35,7 @@ class AccountTransaction {
   });
 }
 
-class PaymentData {
+class AccountVoucherData {
   final String title;
   final String orgName;
   final BranchInfo branchInfo;
@@ -44,7 +44,7 @@ class PaymentData {
   final List<AccountTransaction> accountTransactions;
   final double amount;
 
-  PaymentData({
+  AccountVoucherData({
     required this.title,
     required this.orgName,
     required this.branchInfo,
@@ -55,7 +55,7 @@ class PaymentData {
   });
 }
 
-final paymentData = PaymentData(
+final paymentData = AccountVoucherData(
   title: "Payment",
   orgName: "TEST ORG",
   branchInfo: BranchInfo(
@@ -112,5 +112,61 @@ final paymentData = PaymentData(
     ),
   ],
   amount: 500,
+  description: 'pay',
+);
+
+final receiptData = AccountVoucherData(
+  title: "Receipt",
+  orgName: "TEST ORG",
+  branchInfo: BranchInfo(
+    displayName: "DP ROAD",
+    gstNo: "33AIVPV0468N1ZC",
+    phone: null,
+    mobileNos: ["9842019102", "7373776102"],
+    email: "support@auditplus.io",
+    address: AddressInfo(
+      address: "2nd FLOOR,45,GIN FACTORY ROAD",
+      city: "TUTICORIN",
+      pincode: "628002",
+    ),
+  ),
+  voucherInfo: VoucherInfo(
+    voucherNo: "MBBB232427585555",
+    date: "2023-11-21",
+    time: "06.07 P.M",
+    refNo: "ST1",
+    voucherName: "RECEIPT",
+    voucherType: "receipt",
+  ),
+  accountTransactions: [
+    AccountTransaction(
+      account: "cust3",
+      credit: 20,
+      debit: 0,
+      onAccount: -50,
+      adjs: [
+        PendingAdjustment(
+          date: "2023-09-27",
+          refType: "new",
+          principalAmount: 10,
+          paidAmount: -10,
+          voucherNo: "DPJ271",
+        ),
+        PendingAdjustment(
+          date: "2023-09-26",
+          refType: "adj",
+          voucherNo: "DP2223162218",
+          principalAmount: 21,
+          paidAmount: -20,
+        ),
+      ],
+    ),
+    AccountTransaction(
+      account: "Cash",
+      credit: 0,
+      debit: 30,
+    ),
+  ],
+  amount: 30,
   description: 'pay',
 );

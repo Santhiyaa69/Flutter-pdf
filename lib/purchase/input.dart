@@ -1,5 +1,6 @@
 import '../common/amount_info.dart';
 import '../common/branch_info.dart';
+import '../common/column_config.dart';
 import '../common/tax_summary.dart';
 import '../common/voucher_info.dart';
 import '../main.dart';
@@ -77,16 +78,6 @@ class PurchaseData {
     required this.netAmount,
     required this.billedBy,
     this.description,
-  });
-}
-
-class ColumnConfig {
-  final double width;
-  final String label;
-
-  ColumnConfig({
-    required this.width,
-    required this.label,
   });
 }
 

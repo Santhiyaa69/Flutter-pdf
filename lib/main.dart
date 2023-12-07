@@ -1,43 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:print_pdf/payment/payment.dart';
-import 'package:print_pdf/purchase/input.dart';
-import 'package:print_pdf/purchase/purchase_a4.dart';
-import 'package:print_pdf/sale/sale_a4.dart';
-import 'package:print_pdf/stock_transfer/input.dart';
+
 import 'package:printing/printing.dart';
 
-// import 'customer_wise_sales/customer_wise_sales.dart';
-// import 'customer_wise_sales/customer_wise_sales_detail.dart';
-// import 'customer_wise_sales/customer_wise_sales_input.dart';
-
-// import 'sales_by_incharge/sales_by_incharge.dart';
-// import 'sales_by_incharge/sales_by_incharge_input.dart';
-
-// import 'expiry_analysis/expiry_analysis.dart';
-// import 'expiry_analysis/expiry_analysis_input.dart';
-
-// import 'stock_analysis/stock_analysis.dart';
-// import 'stock_analysis/stock_analysis_input.dart';
-
 import 'common/branch_info.dart';
-import 'payment/input.dart';
-import 'sale/input.dart';
-import 'package:print_pdf/sale/sale_78mm.dart';
-import 'sale/sale_a6.dart';
-import 'sale_quotation/input.dart';
-import 'sale_quotation/sale_quotation_a4.dart';
-import 'stock_transfer/stock_transfer.dart';
-
-// import 'sale_register/sale_register_detail.dart';
-// import 'sale_register/sale_register_view.dart';
-// import 'sale_register/sale_register_input.dart';
-
-// import 'purchase_register/purchase_register.dart';
-// import 'purchase_register/purchase_register_detail.dart';
-// import 'purchase_register/purchase_register_input.dart';
-
-// import 'reorder_analysis/reorder_analysis.dart';
-// import 'reorder_analysis/reorder_analysis_input.dart';
+import './pdf_templates.dart';
 
 const double point = 1.0;
 const double inch = 72.0;
@@ -113,16 +79,17 @@ class Home extends StatelessWidget {
 
                 // buildSaleLayoutA(saleData, saleLayoutAConfig);
                 // buildSaleLayoutB(saleData, saleLayoutBConfig);
-                // buildSaleLayoutA6(saleData, saleLayoutA6Config);
-                // buildSaleQuotationLayout(
-                //     saleQuotationData, saleQuotationConfig);
-                // buildPurchaseLayout(purchaseData, purchaseConfig);
-                //     buildStockTransferLayout(
-                //   stockTransferData,
-                //   stockTransferConfig,
-                // );
+                buildSaleLayoutA6(saleData, saleLayoutA6Config);
+            // buildSaleQuotationLayout(
+            //     saleQuotationData, saleQuotationConfig);
+            // buildPurchaseLayout(purchaseData, purchaseConfig);
+            //     buildStockTransferLayout(
+            //   stockTransferData,
+            //   stockTransferConfig,
+            // );
 
-                buildPayment(paymentData);
+            // buildPayment(paymentData);
+            // buildReceipt(receiptData);
           },
         ),
       ),

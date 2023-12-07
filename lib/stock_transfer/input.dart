@@ -1,6 +1,7 @@
+import 'package:print_pdf/common/column_config.dart';
+
 import '../common/branch_info.dart';
 import '../common/voucher_info.dart';
-import '../sale/input.dart';
 
 class StockTransferItem {
   final String name;

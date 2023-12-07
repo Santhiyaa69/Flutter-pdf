@@ -1,5 +1,6 @@
 import '../common/amount_info.dart';
 import '../common/branch_info.dart';
+import '../common/column_config.dart';
 import '../common/delivery_info.dart';
 import '../common/tax_summary.dart';
 import '../common/voucher_info.dart';
@@ -108,16 +109,6 @@ class SaleData {
     required this.billedBy,
     this.description,
     this.qrCode,
-  });
-}
-
-class ColumnConfig {
-  final double width;
-  final String label;
-
-  ColumnConfig({
-    required this.width,
-    required this.label,
   });
 }
 
@@ -1110,6 +1101,6 @@ final saleLayoutA6Config = SaleLayoutA6Config(
     width: 1,
     label: "AMOUNT",
   ),
-  showGSTSummary: false,
+  showGSTSummary: true,
   showBillDetails: true,
 );

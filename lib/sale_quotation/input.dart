@@ -1,5 +1,6 @@
 import '../common/amount_info.dart';
 import '../common/branch_info.dart';
+import '../common/column_config.dart';
 import '../common/tax_summary.dart';
 import '../common/voucher_info.dart';
 import '../main.dart';
